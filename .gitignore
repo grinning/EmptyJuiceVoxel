@@ -2,3 +2,4 @@ objs/
 bin/
 EJV.depends
 EJV.layout
+*.cbTemp
