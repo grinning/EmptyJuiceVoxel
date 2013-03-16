@@ -18,7 +18,8 @@ namespace EJV {
 		ITEMUSE,
 		ITEMCHANGE,
 		KEYPRESS,
-		MENUSELECT
+		MENUSELECT,
+		CHAT
 		//what else am I missing?
 	};
 
@@ -40,9 +41,10 @@ namespace EJV {
 		//is this everything?
 	}
 
-	struct menu {
+	struct action {
 		actionType type;
 		union data {
+		    std::string message;//This is REALLY bad. Dear god. Will this even compile?
 			itemUseType itemUsed;
 			int changedTo;
 			keyboardKey key;
