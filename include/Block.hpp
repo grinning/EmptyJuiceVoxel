@@ -3,26 +3,24 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
-#ifndef METADATA_INCLUDED
-#define METADATA_INCLUDED
+#ifndef BLOCK_INCLUDED
+#define BLOCK_INCLUDED
+
+#include <map>
+#include <string>
+
+#include "metadata.hpp"
 
 /**
- * @file Interface for metadata
+ * @file Interface for blocks
  *
  */
-namespace EJV
-{
-    /**
-     * Structure for module specific metadata
-     * about blocks, chunks, or worlds.
-     * Hold a basic void* pointer and a size.
-     */
-	struct Metadata
-	{
-		int size;
 
-		void *data;
-	}
+namespace EJV {
+	struct block {
+		int id;
+		std::map(std::string,metadata) data;
+	};
 }
 
-#endif //METADATA_INCLUDED
+#endif //BLOCK_INCLUDED

@@ -13,14 +13,20 @@
  *
  */
 
-namespace EJV {
-	enum menuType {
+namespace EJV
+{
+	enum MenuType
+	{
 		//fill this in...
 	};
 
-	struct menu {
-		menuType type;
-		union data {
+    // Once again I recommend we use inheritance instead of unions -Dot
+	struct Menu
+	{
+		MenuType type;
+
+		union Data
+		{
 			//this too...
 		}
 	}

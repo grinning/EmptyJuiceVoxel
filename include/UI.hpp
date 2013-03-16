@@ -14,8 +14,8 @@
  * @file Interface for UI modules
  *
  */
-
-namespace EJV {
+namespace EJV
+{
     /**
      * Updates a chunk for the UI/network connections.
      *
@@ -24,7 +24,7 @@ namespace EJV {
      * @param z Z chunk coord.
      * @return Updated chunk.
      */
-	void updateChunk(int x,int y,int z,chunk *c);
+	void updateChunk(int x, int y, int z, Chunk *c);
 
     /**
      * Call used by UI to get a chunk.
@@ -34,14 +34,14 @@ namespace EJV {
      * @param z Z chunk coord.
      * @return The chunk at that position.
      */
-	chunk *getChunk(int x,int y,int z); //external
+	Chunk *getChunk(int x, int y, int z); //external
 
 	/**
 	 * Call used by UI to push a user action.
 	 *
 	 * @param act An action the player mad.
 	 */
-	void userAction(action* act); //external
+	void userAction(Action* act); //external
 
     /**
      * Shows the user a menu.
@@ -49,7 +49,7 @@ namespace EJV {
      * @param m Menu to display.
      * @param playerName Name of Player to show menu.
      */
-    void displayMenu(menu *m, std::string playerName);
+    void displayMenu(Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Dot
 
 }
 

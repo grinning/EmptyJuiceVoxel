@@ -12,8 +12,8 @@
  * @file Interface for generator modules
  *
  */
-
-namespace EJV {
+namespace EJV
+{
     /**
      * Provides a chunk.
      *
@@ -22,7 +22,7 @@ namespace EJV {
      * @param z Z chunk coord.
      * @return A generated chunk.
      */
-	chunk *genChunk(int x,int y,int z);
+	Chunk *generateChunk(int x, int y, int z);
 }
 
 #endif //GENERATOR_INCLUDED

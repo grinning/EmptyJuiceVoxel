@@ -18,13 +18,14 @@
  *
  */
 
-namespace EJV {
+namespace EJV
+{
     /**
      * Ticks each rules module. Used for simulation/physics.
 
      * @param act List of actions that players have taken.
      */
-	void tick(action *act);
+	void tick(Action *act);
 
 	/**
 	 * Call used by rules to get a chunk.
@@ -35,7 +36,8 @@ namespace EJV {
      * @param z Z chunk coord.
      * @return Chunk at those coords.
 	 */
-	chunk *getChunk(int x,int y,int z); //external
+	Chunk *getChunk(int x, int y, int z); //external
+
 	/**
 	 * Call used by rules to set a chunk
 	 *
@@ -44,8 +46,7 @@ namespace EJV {
      * @param z Z chunk coord.
      * @param c Chunk to set.
 	 */
-	void setChunk(int x,int y,int z,chunk *c); //external
-
+	void setChunk(int x, int y, int z, Chunk *c); //external
 
     /**
      * Call used by rules to get the metadata
@@ -54,7 +55,8 @@ namespace EJV {
      * @param which Name of metadata's module.
      * @return Metadata of that module.
      */
-	metadata *getMetadata(std::string which); //external
+	,etadata *getMetadata(const std::string& which); //external
+
 	/**
 	 * Call used by rules to set the metadata
 	 * of the world.
@@ -62,7 +64,7 @@ namespace EJV {
 	 * @param which Name of metadata's module.
 	 * @param data Metadata to set.
 	 */
-	void setMetadata(std::string which,metadata* data); //external
+	void setMetadata(const std::string& which, Metadata* data); //external
 
 	/**
 	 * Call used by rules to display a menu to a player.
@@ -70,7 +72,7 @@ namespace EJV {
 	 * @param m Menu to display.
 	 * @param playerName name of the player to show the menu.
 	 */
-	void displayMenu(menu *m, std::string playerName); //external
+	void displayMenu(Menu *m, const std::string& playerName); //external // I think a pointer to a player structure would be more suitable -Dot
 }
 
 #endif //RULES_INCLUDED

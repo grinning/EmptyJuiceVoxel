@@ -19,24 +19,28 @@
 #define CHUNK_LENGTH 32
 #define CHUNK_HEIGHT 32
 
-namespace EJV {
+namespace EJV
+{
     /**
      * A chunk contains width * length * height blocks
      * stored as shorts. It also contains a metadata map
      * for various modules.
      */
-	struct chunk {
+	struct Chunk
+	{
+        /**
+         * Map of (x + z * width + y * width * length) to a map of
+         * module name to metadata. -1 entry is chunk metadata.
+         */
+	    typedef std::map<int, std::map<const std::string, Metadata> > MetadataMap;
+
 	    /**
 	     * Short array indexed by [width][length][height] (xzy)
 	     * representing blockdata.
          */
 		unsigned short[CHUNK_WIDTH][CHUNK_LENGTH][CHUNK_HEIGHT] blocks;
 
-        /**
-         * Map of (x + z * width + y * width * length) to a map of
-         * module name to metadata. -1 entry is chunk metadata.
-         */
-        std::map<int,std::map<std::string,metadata> data;
+        MetadataMap data;
 	};
 }
 
