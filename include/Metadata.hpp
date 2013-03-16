@@ -12,6 +12,11 @@
  */
 
 namespace EJV {
+    /**
+     * Structure for module specific metadata
+     * about blocks, chunks, or worlds.
+     * Hold a basic void* pointer and a size.
+     */
 	struct metadata {
 		int size;
 		void *data;

@@ -14,6 +14,14 @@
  */
 
 namespace EJV {
+    /**
+     * Provides a chunk.
+     *
+     * @param x X chunk coord.
+     * @param y Y chunk coord.
+     * @param z Z chunk coord.
+     * @return A generated chunk.
+     */
 	chunk *genChunk(int x,int y,int z);
 }
 

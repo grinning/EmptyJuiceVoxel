@@ -15,28 +15,28 @@
 
 namespace EJV {
 	enum actionType {
-		itemUse,
-		itemChange,
-		keypress,
-		menuSelect
+		ITEMUSE,
+		ITEMCHANGE,
+		KEYPRESS,
+		MENUSELECT
 		//what else am I missing?
 	};
 
 	enum itemUseType {
-		primary, //left click
-		secondary, //right click
-		cancel
+		PRIMARY, //left click
+		SENCONDARY, //right click
+		CANCEL //ESC
 	};
 
 	enum keyboardKey {
-		forward,
-		backward,
-		left,
-		right,
-		jump,
-		sneak,
-		inventory,
-		drop
+		FORWARD,
+		BACKWARD,
+		LEFT,
+		RIGHT,
+		JUMP,
+		SNEAK,
+		INVENTORY,
+		DROP
 		//is this everything?
 	}
 
