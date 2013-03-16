@@ -3,26 +3,27 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
-#ifndef UI_INCLUDED
-#define UI_INCLUDED
+#ifndef MENU_INCLUDED
+#define MENU_INCLUDED
 
-#include "chunk.hpp"
-#include "action.hpp"
-#include "menu.hpp"
+#include "Chunk.hpp"
 
 /**
- * @file Interface for UI modules
+ * @file Interface for menus
  *
  */
 
 namespace EJV {
-	void updateChunk(int x,int y,int z,chunk *c);
-	
-	chunk *getChunk(int x,int y,int z); //external
+	enum menuType {
+		//fill this in...
+	};
 
-	void userAction(action* act); //external
-
-	void displayMenu(menu *m);
+	struct menu {
+		menuType type;
+		union data {
+			//this too...
+		}
+	}
 }
 
-#endif //UI_INCLUDED
+#endif //MENU_INCLUDED

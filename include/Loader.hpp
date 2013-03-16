@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include "chunk.hpp"
-#include "metadata.hpp"
+#include "Chunk.hpp"
+#include "Metadata.hpp"
 
 /**
  * @file Interface for loader modules

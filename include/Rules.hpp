@@ -8,10 +8,10 @@
 
 #include <string>
 
-#include "action.hpp"
-#include "chunk.hpp"
-#include "metadata.hpp"
-#include "menu.hpp"
+#include "Action.hpp"
+#include "Chunk.hpp"
+#include "Metadata.hpp"
+#include "Menu.hpp"
 
 /**
  * @file Interface for rules modules

@@ -3,27 +3,18 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
-#ifndef MENU_INCLUDED
-#define MENU_INCLUDED
+#ifndef GENERATOR_INCLUDED
+#define GENERATOR_INCLUDED
 
-#include "chunk.hpp"
+#include "Chunk.hpp"
 
 /**
- * @file Interface for menus
+ * @file Interface for generator modules
  *
  */
 
 namespace EJV {
-	enum menuType {
-		//fill this in...
-	};
-	
-	struct menu {
-		menuType type;
-		union data {
-			//this too...
-		}	
-	}
+	chunk *genChunk(int x,int y,int z);
 }
 
-#endif //MENU_INCLUDED
+#endif //GENERATOR_INCLUDED

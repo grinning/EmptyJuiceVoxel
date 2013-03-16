@@ -6,7 +6,7 @@
 #ifndef ACTION_INCLUDED
 #define ACTION_INCLUDED
 
-#include "chunk.hpp"
+#include "Chunk.hpp"
 
 /**
  * @file Interface for actions
@@ -39,7 +39,7 @@ namespace EJV {
 		drop
 		//is this everything?
 	}
-		
+
 	struct menu {
 		actionType type;
 		union data {

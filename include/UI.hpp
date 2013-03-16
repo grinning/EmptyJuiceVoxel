@@ -3,18 +3,26 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
-#ifndef GENERATOR_INCLUDED
-#define GENERATOR_INCLUDED
+#ifndef UI_INCLUDED
+#define UI_INCLUDED
 
-#include "chunk.hpp"
+#include "Chunk.hpp"
+#include "Action.hpp"
+#include "Menu.hpp"
 
 /**
- * @file Interface for generator modules
+ * @file Interface for UI modules
  *
  */
 
 namespace EJV {
-	chunk *genChunk(int x,int y,int z);
+	void updateChunk(int x,int y,int z,chunk *c);
+
+	chunk *getChunk(int x,int y,int z); //external
+
+	void userAction(action* act); //external
+
+	void displayMenu(menu *m);
 }
 
-#endif //GENERATOR_INCLUDED
+#endif //UI_INCLUDED
