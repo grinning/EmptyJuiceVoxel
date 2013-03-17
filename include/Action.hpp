@@ -13,6 +13,7 @@
  * @file Interface for actions
  *
  */
+
 namespace EJV
 {
 	enum ActionType
@@ -55,21 +56,6 @@ namespace EJV
 		KEY_DROP
 	}
 
-    // I suggest we use inheritance instead of unions - Andrew
-	/*struct Action
-	{
-		ActionType type;
-
-		union data
-		{
-		    std::string message;//This is REALLY bad. Dear god. Will this even compile?
-			ItemUseType itemUsed;
-			int changedTo;
-			KeyboardKey key;
-		}
-	}*/
-
-	// My proposal - Andrew + Invalid
 	namespace Action
 	{
 	    struct Base
@@ -90,7 +76,7 @@ namespace EJV
 
 	    struct ItemChange : public Base
 	    {
-	        const unsigned short newSlot; // I am not really sure about this - Andrew
+	        const unsigned short newSlot;
 
 	        inline ItemChange(unsigned short _newSlot) : Base(ACTION_ITEM_USE), newSlot(_newSlot) {}
 	    };

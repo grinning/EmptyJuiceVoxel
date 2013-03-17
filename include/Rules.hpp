@@ -28,6 +28,8 @@ namespace EJV
      */
 	extern "C" void tick(Action *act);
 
+	// EXTERNAL
+
 	/**
 	 * Call used by rules to get a chunk.
 	 * Will generate if not found in loader.
@@ -37,7 +39,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @return Chunk at those coords.
 	 */
-	Chunk *getChunk(int x, int y, int z); //external
+	Chunk *getChunk(int x, int y, int z);
 
 	/**
 	 * Call used by rules to set a chunk
@@ -47,7 +49,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @param c Chunk to set.
 	 */
-	void setChunk(int x, int y, int z, Chunk *c); //external
+	void setChunk(int x, int y, int z, Chunk *c);
 
     /**
      * Call used by rules to get the metadata
@@ -56,7 +58,7 @@ namespace EJV
      * @param which Name of metadata's module.
      * @return Metadata of that module.
      */
-	Metadata *getMetadata(const std::string& which); //external
+	Metadata *getMetadata(const std::string& which);
 
 	/**
 	 * Call used by rules to set the metadata
@@ -65,7 +67,7 @@ namespace EJV
 	 * @param which Name of metadata's module.
 	 * @param data Metadata to set.
 	 */
-	void setMetadata(const std::string& which, Metadata* data); //external
+	void setMetadata(const std::string& which, Metadata* data);
 
 	/**
 	 * Call used by rules to display a menu to a player.
@@ -73,7 +75,7 @@ namespace EJV
 	 * @param m Menu to display.
 	 * @param playerName name of the player to show the menu.
 	 */
-	void displayMenu(Menu *m, const std::string& playerName); //external // I think a pointer to a player structure would be more suitable -Andrew
+	void displayMenu(Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
 }
 
 #endif //RULES_INCLUDED

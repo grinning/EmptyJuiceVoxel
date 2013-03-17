@@ -16,6 +16,7 @@
  * @file Interface for loader modules
  *
  */
+
 namespace EJV
 {
     /**
@@ -48,16 +49,6 @@ namespace EJV
      */
 	extern "C" void releaseChunk(int x, int y, int z, Chunk *c);
 
-	/**
-	 * States that a chunk is no longer valid.
-	 * Used for networking and is external.
-	 *
-     * @param x X chunk coord.
-     * @param y Y chunk coord.
-     * @param z Z chunk coord.
-	 */
-	void invalidateChunk(int x, int y, int z); //external
-
     /**
      * Get metadata about the world.
      *
@@ -73,6 +64,18 @@ namespace EJV
 	 * @param data The metadata to set.
 	 */
 	extern "C" void setMetadata(const std::string& which, Metadata *data);
+
+	// EXTERNAL
+
+	/**
+	 * States that a chunk is no longer valid.
+	 * Used for networking and is external.
+	 *
+     * @param x X chunk coord.
+     * @param y Y chunk coord.
+     * @param z Z chunk coord.
+	 */
+	void invalidateChunk(int x, int y, int z);
 }
 
 #endif //LOADER_INCLUDED

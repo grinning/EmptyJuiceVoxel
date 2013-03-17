@@ -32,18 +32,6 @@ namespace EJV
 		MENU_COUNT
 	};
 
-    // Once again I recommend we use inheritance instead of unions -Andrew
-	/*struct Menu
-	{
-		MenuType type;
-
-		union Data
-		{
-			//this too...
-		}
-	}*/
-
-	// My proposal -Andrew + Invalid
 	namespace Menu
 	{
 	    struct Base

@@ -13,6 +13,7 @@
  * @file Interface for generator modules
  *
  */
+
 namespace EJV
 {
     /**

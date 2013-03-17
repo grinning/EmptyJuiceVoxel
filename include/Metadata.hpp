@@ -11,6 +11,7 @@
  * @file Interface for metadata
  *
  */
+
 namespace EJV
 {
     /**
