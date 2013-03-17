@@ -69,52 +69,49 @@ namespace EJV
 		}
 	}*/
 
-	// My proposal - Andrew
+	// My proposal - Andrew + Invalid
 	namespace Action
 	{
 	    struct Base
 	    {
 	        const ActionType type;
 
-	        Base(ActionType _type = ACTION_UNKNOWN) : type(_type)
-	        {
-	            if (type >= ACTION_COUNT) type = ACTION_UNKNOWN;
-	        }
+	        inline Base(ActionType t) : type(t >= ACTION_COUNT ? ACTION_UNKNOWN : t) {}
 
 	        // TODO: Add more info (like player, world e.t.c.)
 	    };
 
 	    struct ItemUse : public Base
 	    {
-	        ItemUseType useType;
+	        const ItemUseType useType;
 
-	        ItemUse(ItemUseType _useType) : Base(ACTION_ITEM_USE), useType(_useType) {}
+	        inline ItemUse(ItemUseType _useType) : Base(ACTION_ITEM_USE), useType(_useType) {}
 	    };
 
 	    struct ItemChange : public Base
 	    {
-	        unsigned short newSlot; // I am not really sure about this - Andrew
+	        const unsigned short newSlot; // I am not really sure about this - Andrew
 
-	        ItemChange(unsigned short _newSlot) : Base(ACTION_ITEM_USE), newSlot(_newSlot) {}
+	        inline ItemChange(unsigned short _newSlot) : Base(ACTION_ITEM_USE), newSlot(_newSlot) {}
 	    };
 
 	    struct KeyPress : public Base
 	    {
-	        KeyboardKey key;
+	        const KeyboardKey key;
 
-	        KeyPress(KeyboardKey _key) : Base(ACTION_KEY_PRESS), key(_key) {}
+	        inline KeyPress(KeyboardKey _key) : Base(ACTION_KEY_PRESS), key(_key) {}
 	    };
 
 	    struct MenuSelect : public Base
 	    {
-	        MenuSelect() : Base(ACTION_MENU_SELECT) {}
+	        inline MenuSelect() : Base(ACTION_MENU_SELECT) {}
 	    };
 
 	    struct Chat : public Base
 	    {
-	        std::string message;
+	        const std::string message;
 
-	        Chat(const std::string& _message) : Base(ACTION_CHAT), message(_message) {}
+	        inline Chat(const std::string& _message) : Base(ACTION_CHAT), message(_message) {}
 	    };
 	}
 }

@@ -18,6 +18,8 @@ namespace EJV
 {
 	enum MenuType
 	{
+	    MENU_UNKNOWN,
+
 		MENU_MAIN,
 
 		MENU_SINGLEPLAYER,
@@ -25,7 +27,9 @@ namespace EJV
 		MENU_OPTIONS,
 
 		// In-game ?
-		MENU_BLOCK
+		MENU_BLOCK,
+
+		MENU_COUNT
 	};
 
     // Once again I recommend we use inheritance instead of unions -Andrew
@@ -39,34 +43,34 @@ namespace EJV
 		}
 	}*/
 
-	// My proposal -Andrew
+	// My proposal -Andrew + Invalid
 	namespace Menu
 	{
 	    struct Base
 	    {
-	        virtual MenuType getType() const = 0;
+	        const MenuType type;
 
-	        // TODO: Add more info (position, state e.t.c.)
+	        inline Base(MenuType t) : type(t >= MENU_COUNT ? MENU_UNKNOWN : t) {}
 	    };
 
 	    struct Main : public Base
 	    {
-	        virtual MenuType getType() const { return MENU_MAIN; }
+	        inline Main() : Base(MENU_MAIN) {}
 	    };
 
 	    struct Singleplayer : public Base
 	    {
-	        virtual MenuType getType() const { return MENU_SINGLEPLAYER; }
+	        inline Singleplayer() : Base(MENU_SINGLEPLAYER) {}
 	    };
 
 	    struct Multiplayer : public Base
 	    {
-	        virtual MenuType getType() const { return MENU_MULTIPLAYER; }
+	        inline Multiplayer() : Base(MENU_MULTIPLAYER) {}
 	    };
 
 	    struct Block : public Base
 	    {
-	        virtual MenuType getType() const { return MENU_BLOCK; }
+	        inline Block() : Base(MENU_BLOCK) {}
 	    };
 	}
 }
