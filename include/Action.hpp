@@ -17,6 +17,8 @@ namespace EJV
 {
 	enum ActionType
 	{
+	    ACTION_UNKNOWN,
+
 		ACTION_ITEM_USE,
 		ACTION_ITEM_CHANGE,
 
@@ -24,7 +26,9 @@ namespace EJV
 
 		ACTION_MENU_SELECT,
 
-		ACTION_CHAT
+		ACTION_CHAT,
+
+		ACTION_COUNT
 	};
 
 	enum ItemUseType
@@ -70,42 +74,47 @@ namespace EJV
 	{
 	    struct Base
 	    {
-	        virtual ActionType getType() const = 0;
+	        const ActionType type;
+
+	        Base(ActionType _type = ACTION_UNKNOWN) : type(_type)
+	        {
+	            if (type >= ACTION_COUNT) type = ACTION_UNKNOWN;
+	        }
 
 	        // TODO: Add more info (like player, world e.t.c.)
 	    };
 
 	    struct ItemUse : public Base
 	    {
-	        ItemUseType type;
+	        ItemUseType useType;
 
-	        virtual ActionType getType() const { return ACTION_ITEM_USE; }
+	        ItemUse(ItemUseType _useType) : Base(ACTION_ITEM_USE), useType(_useType) {}
 	    };
 
 	    struct ItemChange : public Base
 	    {
 	        unsigned short newSlot; // I am not really sure about this - Andrew
 
-	        virtual ActionType getType() const { return ACTION_ITEM_CHANGE; }
+	        ItemChange(unsigned short _newSlot) : Base(ACTION_ITEM_USE), newSlot(_newSlot) {}
 	    };
 
 	    struct KeyPress : public Base
 	    {
 	        KeyboardKey key;
 
-	        virtual ActionType getType() const { return ACTION_KEY_PRESS; }
+	        KeyPress(KeyboardKey _key) : Base(ACTION_KEY_PRESS), key(_key) {}
 	    };
 
 	    struct MenuSelect : public Base
 	    {
-	        virtual ActionType getType() const { return ACTION_MENU_SELECT; }
+	        MenuSelect() : Base(ACTION_MENU_SELECT) {}
 	    };
 
 	    struct Chat : public Base
 	    {
 	        std::string message;
 
-	        virtual ActionType getType() const { return ACTION_CHAT; }
+	        Chat(const std::string& _message) : Base(ACTION_CHAT), message(_message) {}
 	    };
 	}
 }
