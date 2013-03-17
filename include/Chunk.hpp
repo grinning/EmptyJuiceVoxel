@@ -11,6 +11,9 @@
 
 #include <map>
 
+#include <cstring>
+#include <string>
+
 /**
  * @file Interface for chunks
  *
@@ -39,7 +42,7 @@ namespace EJV
 	     * Short array indexed by [width][length][height] (xzy)
 	     * representing blockdata.
          */
-		unsigned short[CHUNK_WIDTH][CHUNK_LENGTH][CHUNK_HEIGHT] blocks;
+		unsigned short blocks[CHUNK_WIDTH][CHUNK_LENGTH][CHUNK_HEIGHT];
 
         MetadataMap data;
 	};

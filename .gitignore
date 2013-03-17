@@ -1,5 +1,7 @@
-objs/
+obj/
 bin/
+
 EJV.depends
 EJV.layout
+
 *.cbTemp

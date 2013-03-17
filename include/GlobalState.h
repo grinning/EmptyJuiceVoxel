@@ -11,19 +11,21 @@
 
 #include <map>
 
+#include <cstring>
+
 /**
  * @file Storage for the global state
  *
  */
 
- namespace EJV
- {
-     struct World
-     {
+namespace EJV
+{
+    struct World
+    {
          typedef std::map<std::pair<int, int>, Chunk*> ChunkMap; // Temporary
 
          ChunkMap loadedChunks;
-     };
+    };
 
     class State
     {
@@ -35,7 +37,7 @@
             State() {}
             State(const State& orig) {}
             virtual ~State() {}
-            State& operator=(const State& orig) {}
+            State& operator=(const State& orig) { return *this; }
 
         public:
             typedef std::map<const std::string, World*> WorldMap; // Temporary
@@ -43,7 +45,9 @@
             WorldMap loadedWorlds;
 
             inline static State &GET()
-                { if(!_singleton) _singleton = new State(); return *_singleton; }
+            {
+                return _singleton ? *_singleton : *(_singleton = new State);
+            }
     };
  }
 

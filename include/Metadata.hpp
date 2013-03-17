@@ -23,7 +23,7 @@ namespace EJV
 		int size;
 
 		void *data;
-	}
+	};
 }
 
 #endif //METADATA_INCLUDED
