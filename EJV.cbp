@@ -35,11 +35,13 @@
 		<Unit filename="include/Action.hpp" />
 		<Unit filename="include/Chunk.hpp" />
 		<Unit filename="include/Generator.hpp" />
+		<Unit filename="include/GlobalState.h" />
 		<Unit filename="include/Loader.hpp" />
 		<Unit filename="include/Menu.hpp" />
 		<Unit filename="include/Metadata.hpp" />
 		<Unit filename="include/Rules.hpp" />
 		<Unit filename="include/UI.hpp" />
+		<Unit filename="src/GlobalState.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

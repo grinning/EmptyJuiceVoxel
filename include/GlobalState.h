@@ -28,6 +28,9 @@
     class State
     {
         private:
+            // Singleton
+            static State *_singleton;
+
             // Private constructors / destructors
             State() {}
             State(const State& orig) {}
@@ -39,12 +42,8 @@
 
             WorldMap loadedWorlds;
 
-            static State* GET() const
-            {
-                static State singleton;
-
-                return &singleton;
-            }
+            inline static State &GET()
+                { if(!_singleton) _singleton = new State(); return *_singleton; }
     };
  }
 
