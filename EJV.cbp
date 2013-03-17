@@ -41,6 +41,7 @@
 		<Unit filename="include/Metadata.hpp" />
 		<Unit filename="include/Rules.hpp" />
 		<Unit filename="include/UI.hpp" />
+		<Unit filename="modules/Generators/Flatland/Flatland.cpp" />
 		<Unit filename="src/GlobalState.cpp" />
 		<Extensions>
 			<code_completion />

@@ -17,6 +17,20 @@
 namespace EJV
 {
     /**
+     * Run when the module is loaded.
+     * This allows for the module to
+     * initialize based on configurations.
+     */
+    extern "C" void init();
+
+    /**
+     * Run when the module is unloaded.
+     * This allows modules to close files,
+     * end connections, and clean up.
+     */
+    extern "C" void destroy();
+
+    /**
      * Provides a chunk.
      *
      * @param x X chunk coord.
