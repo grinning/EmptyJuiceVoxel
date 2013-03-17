@@ -30,22 +30,22 @@ namespace EJV
      * stored as shorts. It also contains a metadata map
      * for various modules.
      */
-	struct Chunk
-	{
+    struct Chunk
+    {
         /**
          * Map of (x + z * width + y * width * length) to a map of
          * module name to metadata. -1 entry is chunk metadata.
          */
-	    typedef std::map<int, std::map<const std::string, Metadata> > MetadataMap;
+        typedef std::map<int, std::map<const std::string, Metadata> > MetadataMap;
 
-	    /**
-	     * Short array indexed by [width][length][height] (xzy)
-	     * representing blockdata.
+        /**
+         * Short array indexed by [width][length][height] (xzy)
+         * representing blockdata.
          */
-		unsigned short blocks[CHUNK_WIDTH][CHUNK_LENGTH][CHUNK_HEIGHT];
+        unsigned short blocks[CHUNK_WIDTH][CHUNK_LENGTH][CHUNK_HEIGHT];
 
         MetadataMap data;
-	};
+    };
 }
 
 #endif //CHUNK_INCLUDED

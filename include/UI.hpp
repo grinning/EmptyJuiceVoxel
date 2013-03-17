@@ -40,7 +40,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @return Updated chunk.
      */
-	extern "C" void updateChunk(int x, int y, int z, Chunk *c);
+    extern "C" void updateChunk(int x, int y, int z, Chunk *c);
 
     /**
      * Shows the user a menu.
@@ -60,14 +60,14 @@ namespace EJV
      * @param z Z chunk coord.
      * @return The chunk at that position.
      */
-	Chunk *getChunk(int x, int y, int z);
+    Chunk *getChunk(int x, int y, int z);
 
-	/**
-	 * Call used by UI to push a user action.
-	 *
-	 * @param act An action the player mad.
-	 */
-	void userAction(Action* act);
+    /**
+     * Call used by UI to push a user action.
+     *
+     * @param act An action the player mad.
+     */
+    void userAction(Action* act);
 }
 
 #endif //UI_INCLUDED

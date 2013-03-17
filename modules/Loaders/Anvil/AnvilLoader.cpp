@@ -4,16 +4,14 @@
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
 
-#ifndef LOADER_INCLUDED
-#define LOADER_INCLUDED
+#ifndef ANVIL_INCLUDED
+#define ANVIL_INCLUDED
 
-#include <string>
-
-#include "Chunk.hpp"
-#include "Metadata.hpp"
+#include "Loader.hpp"
+#include "mNBT/RegionLoader.hpp"
 
 /**
- * @file Interface for loader modules
+ * @file Anvil file format loader.
  *
  */
 
@@ -24,7 +22,7 @@ namespace EJV
      * This allows for the module to
      * initialize based on configurations.
      */
-    extern "C" void init();
+    extern "C" void init() {}
 
     /**
      * Run when the module is unloaded.

@@ -19,12 +19,12 @@ namespace EJV
      * about blocks, chunks, or worlds.
      * Hold a basic void* pointer and a size.
      */
-	struct Metadata
-	{
-		int size;
+    struct Metadata
+    {
+        int size;
 
-		void *data;
-	};
+        void *data;
+    };
 }
 
 #endif //METADATA_INCLUDED
