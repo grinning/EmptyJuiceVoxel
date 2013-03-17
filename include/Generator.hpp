@@ -3,6 +3,7 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
+
 #ifndef GENERATOR_INCLUDED
 #define GENERATOR_INCLUDED
 
@@ -22,7 +23,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @return A generated chunk.
      */
-	Chunk *generateChunk(int x, int y, int z);
+	extern "C" Chunk *generateChunk(int x, int y, int z);
 }
 
 #endif //GENERATOR_INCLUDED

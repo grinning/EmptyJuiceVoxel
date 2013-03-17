@@ -3,6 +3,7 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
+
 #ifndef LOADER_INCLUDED
 #define LOADER_INCLUDED
 
@@ -25,7 +26,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @return Pointer to a chunk if sucess, NULL otherwise.
      */
-	Chunk *loadChunk(int x, int y, int z);
+	extern "C" Chunk *loadChunk(int x, int y, int z);
 
 	/**
 	 * Saves a chunk to the disc.
@@ -35,7 +36,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @param c Chunk to save.B
      */
-	void putChunk(int x, int y, int z, Chunk *c);
+	extern "C" void putChunk(int x, int y, int z, Chunk *c);
 
 	/**
      * Releases a chunk.
@@ -45,7 +46,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @param c Chunk to release.
      */
-	void releaseChunk(int x, int y, int z, Chunk *c);
+	extern "C" void releaseChunk(int x, int y, int z, Chunk *c);
 
 	/**
 	 * States that a chunk is no longer valid.
@@ -63,7 +64,7 @@ namespace EJV
      * @param which The name of the module.
      * @return the metadata for that module.
      */
-	Metadata *getMetadata(const std::string& which);
+	extern "C" Metadata *getMetadata(const std::string& which);
 
 	/**
 	 * Sets the metadata for a sepecific module.
@@ -71,7 +72,7 @@ namespace EJV
 	 * @param which The name of the module.
 	 * @param data The metadata to set.
 	 */
-	void setMetadata(const std::string& which, Metadata *data);
+	extern "C" void setMetadata(const std::string& which, Metadata *data);
 }
 
 #endif //LOADER_INCLUDED

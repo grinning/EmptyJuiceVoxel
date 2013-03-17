@@ -3,6 +3,7 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
+
 #ifndef UI_INCLUDED
 #define UI_INCLUDED
 
@@ -24,7 +25,7 @@ namespace EJV
      * @param z Z chunk coord.
      * @return Updated chunk.
      */
-	void updateChunk(int x, int y, int z, Chunk *c);
+	extern "C" void updateChunk(int x, int y, int z, Chunk *c);
 
     /**
      * Call used by UI to get a chunk.
@@ -49,7 +50,7 @@ namespace EJV
      * @param m Menu to display.
      * @param playerName Name of Player to show menu.
      */
-    void displayMenu(Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Dot
+    extern "C" void displayMenu(Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
 
 }
 

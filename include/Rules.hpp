@@ -3,6 +3,7 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
+
 #ifndef RULES_INCLUDED
 #define RULES_INCLUDED
 
@@ -25,7 +26,7 @@ namespace EJV
 
      * @param act List of actions that players have taken.
      */
-	void tick(Action *act);
+	extern "C" void tick(Action *act);
 
 	/**
 	 * Call used by rules to get a chunk.
@@ -55,7 +56,7 @@ namespace EJV
      * @param which Name of metadata's module.
      * @return Metadata of that module.
      */
-	,etadata *getMetadata(const std::string& which); //external
+	Metadata *getMetadata(const std::string& which); //external
 
 	/**
 	 * Call used by rules to set the metadata
@@ -72,7 +73,7 @@ namespace EJV
 	 * @param m Menu to display.
 	 * @param playerName name of the player to show the menu.
 	 */
-	void displayMenu(Menu *m, const std::string& playerName); //external // I think a pointer to a player structure would be more suitable -Dot
+	void displayMenu(Menu *m, const std::string& playerName); //external // I think a pointer to a player structure would be more suitable -Andrew
 }
 
 #endif //RULES_INCLUDED

@@ -3,6 +3,7 @@
  * www              : http://www.juicebox.ckef-worx.com             *
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
+
 #ifndef CHUNK_INCLUDED
 #define CHUNK_INCLUDED
 
@@ -15,7 +16,7 @@
  *
  */
 
-#define CHUNK_WIDTH 32 //I just made these sizes up...
+#define CHUNK_WIDTH  32
 #define CHUNK_LENGTH 32
 #define CHUNK_HEIGHT 32
 
