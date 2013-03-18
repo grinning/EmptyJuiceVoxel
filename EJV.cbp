@@ -3,49 +3,80 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="EJV" />
+		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
-				<Option output="bin/EJV" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
+			<Target title="Release-Core">
 				<Option output="bin/EJV" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
+			</Target>
+			<Target title="Release-Modules">
+				<Option output="EJV" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="modules/Commons/include" />
+					<Add directory="modules" />
+				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-O3" />
 			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
-		<Unit filename="include/Action.hpp" />
-		<Unit filename="include/Chunk.hpp" />
-		<Unit filename="include/Generator.hpp" />
-		<Unit filename="include/GlobalState.h" />
-		<Unit filename="include/Loader.hpp" />
-		<Unit filename="include/Menu.hpp" />
-		<Unit filename="include/Metadata.hpp" />
-		<Unit filename="include/Rules.hpp" />
-		<Unit filename="include/UI.hpp" />
-		<Unit filename="modules/Generators/Flatland/Flatland.cpp" />
-		<Unit filename="src/GlobalState.cpp" />
+		<Linker>
+			<Add option="-s" />
+		</Linker>
+		<Unit filename="include/Action.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Chunk.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Generator.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/GlobalState.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Loader.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Menu.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Metadata.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/Rules.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="include/UI.hpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="modules/Generators/Flatland/Flatland.cpp">
+			<Option target="Release-Modules" />
+		</Unit>
+		<Unit filename="modules/Generators/Perlingen/Perlingen.cpp">
+			<Option target="Release-Modules" />
+		</Unit>
+		<Unit filename="modules/Loaders/Anvil/AnvilLoader.cpp">
+			<Option target="Release-Modules" />
+		</Unit>
+		<Unit filename="src/GlobalState.cpp">
+			<Option target="Release-Core" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
