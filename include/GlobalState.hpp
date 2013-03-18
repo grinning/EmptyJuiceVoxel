@@ -20,35 +20,35 @@
 
 namespace EJV
 {
-    struct World
-    {
-         typedef std::map<std::pair<int, int>, Chunk*> ChunkMap; // Temporary
+	struct World
+	{
+		typedef std::map<std::pair<int, int>, Chunk*> ChunkMap; // Temporary
 
-         ChunkMap loadedChunks;
-    };
+		ChunkMap loadedChunks;
+	};
 
-    class State
-    {
+	class State
+	{
         private:
-            // Singleton
-            static State *_singleton;
+		// Singleton
+		static State *_singleton;
 
-            // Private constructors / destructors
-            State() {}
-            State(const State& orig) {}
-            virtual ~State() {}
-            State& operator=(const State& orig) { return *this; }
+		// Private constructors / destructors
+		State() {}
+		State(const State& orig) {}
+		virtual ~State() {}
+		State& operator=(const State& orig) { return *this; }
 
         public:
-            typedef std::map<const std::string, World*> WorldMap; // Temporary
+		typedef std::map<const std::string, World*> WorldMap; // Temporary
 
-            WorldMap loadedWorlds;
+		WorldMap loadedWorlds;
 
-            inline static State &GET()
-            {
-                return _singleton ? *_singleton : *(_singleton = new State);
-            }
-    };
- }
+		inline static State &GET()
+		{
+			return _singleton ? *_singleton : *(_singleton = new State);
+		}
+	};
+}
 
 #endif // GLOBALSTATE_H

@@ -17,79 +17,76 @@
  *
  */
 
-namespace EJV
-{
-    /**
-     * Run when the module is loaded.
-     * This allows for the module to
-     * initialize based on configurations.
-     */
-    extern "C" void init();
+/**
+ * Run when the module is loaded.
+ * This allows for the module to
+ * initialize based on configurations.
+ */
+extern "C" void init();
 
-    /**
-     * Run when the module is unloaded.
-     * This allows modules to close files,
-     * end connections, and clean up.
-     */
-    extern "C" void destroy();
+/**
+ * Run when the module is unloaded.
+ * This allows modules to close files,
+ * end connections, and clean up.
+ */
+extern "C" void destroy();
 
-    /**
-     * Get a chunk from disc.
-     *
-     * @param x X chunk coord.
-     * @param y Y chunk coord.
-     * @param z Z chunk coord.
-     * @return Pointer to a chunk if sucess, NULL otherwise.
-     */
-    extern "C" Chunk *loadChunk(int x, int y, int z);
+/**
+ * Get a chunk from disc.
+ *
+ * @param x X chunk coord.
+ * @param y Y chunk coord.
+ * @param z Z chunk coord.
+ * @return Pointer to a chunk if sucess, NULL otherwise.
+ */
+extern "C" EJV::Chunk *loadChunk(int x, int y, int z);
 
-    /**
-     * Saves a chunk to the disc.
-     *
-     * @param x X chunk coord.
-     * @param y Y chunk coord.
-     * @param z Z chunk coord.
-     * @param c Chunk to save.B
-     */
-    extern "C" void putChunk(int x, int y, int z, Chunk *c);
+/**
+ * Saves a chunk to the disc.
+ *
+ * @param x X chunk coord.
+ * @param y Y chunk coord.
+ * @param z Z chunk coord.
+ * @param c Chunk to save.B
+ */
+extern "C" void putChunk(int x, int y, int z, EJV::Chunk *c);
 
-    /**
-     * Releases a chunk.
-     *
-     * @param x X chunk coord.
-     * @param y Y chunk coord.
-     * @param z Z chunk coord.
-     * @param c Chunk to release.
-     */
-    extern "C" void releaseChunk(int x, int y, int z, Chunk *c);
+/**
+ * Releases a chunk.
+ *
+ * @param x X chunk coord.
+ * @param y Y chunk coord.
+ * @param z Z chunk coord.
+ * @param c Chunk to release.
+ */
+extern "C" void releaseChunk(int x, int y, int z, EJV::Chunk *c);
 
-    /**
-     * Get metadata about the world.
-     *
-     * @param which The name of the module.
-     * @return the metadata for that module.
-     */
-    extern "C" Metadata *getMetadata(const std::string& which);
+/**
+ * Get metadata about the world.
+ *
+ * @param which The name of the module.
+ * @return the metadata for that module.
+ */
+extern "C" EJV::Metadata *getMetadata(const std::string& which);
 
-    /**
-     * Sets the metadata for a sepecific module.
-     *
-     * @param which The name of the module.
-     * @param data The metadata to set.
-     */
-    extern "C" void setMetadata(const std::string& which, Metadata *data);
+/**
+ * Sets the metadata for a sepecific module.
+ *
+ * @param which The name of the module.
+ * @param data The metadata to set.
+ */
+extern "C" void setMetadata(const std::string& which, EJV::Metadata *data);
 
-    // EXTERNAL
+// EXTERNAL
 
-    /**
-     * States that a chunk is no longer valid.
-     * Used for networking and is external.
-     *
-     * @param x X chunk coord.
-     * @param y Y chunk coord.
-     * @param z Z chunk coord.
-     */
-    void invalidateChunk(int x, int y, int z);
-}
+/**
+ * States that a chunk is no longer valid.
+ * Used for networking and is external.
+ *
+ * @param x X chunk coord.
+ * @param y Y chunk coord.
+ * @param z Z chunk coord.
+ */
+void invalidateChunk(int x, int y, int z);
 
 #endif //LOADER_INCLUDED
