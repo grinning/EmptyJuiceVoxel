@@ -18,7 +18,7 @@
 #include <map>
 #include <list>
 
-#include "Block.h"
+#include "Block.hpp"
 
 /// mNBT system namespace.
 namespace mNBT

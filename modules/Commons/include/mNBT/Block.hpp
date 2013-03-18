@@ -17,7 +17,7 @@
 
 #include <stdint.h>
 
-#include "NBTErr.h"
+#include "NBTErr.hpp"
 
 /// mNBT system namespace.
 namespace mNBT

@@ -4,7 +4,7 @@
  * Copyright (c) Empty Juice Box Group :: All Rights Reserved       *
  *#****************************************************************#*/
 
-#include "GlobalState.h"
+#include "GlobalState.hpp"
 
 namespace EJV
 {
