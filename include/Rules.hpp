@@ -21,26 +21,26 @@
 
 extern "C"
 {
-    /**
-     * Run when the module is loaded.
-     * This allows for the module to
-     * initialize based on configurations.
-     */
-    void init();
+	/**
+	 * Run when the module is loaded.
+	 * This allows for the module to
+	 * initialize based on configurations.
+	 */
+	void init();
 
-    /**
-     * Run when the module is unloaded.
-     * This allows modules to close files,
-     * end connections, and clean up.
-     */
-    void destroy();
+	/**
+	 * Run when the module is unloaded.
+	 * This allows modules to close files,
+	 * end connections, and clean up.
+	 */
+	void destroy();
 
-    /**
-     * Ticks each rules module. Used for simulation/physics.
+	/**
+	 * Ticks each rules module. Used for simulation/physics.
 
-     * @param act List of actions that players have taken.
-     */
-    void tick(EJV::Action *act);
+	 * @param act List of actions that players have taken.
+	 */
+	void tick(EJV::Action *act);
 }
 
 // EXTERNAL

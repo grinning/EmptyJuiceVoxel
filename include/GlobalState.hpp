@@ -29,7 +29,7 @@ namespace EJV
 
 	class State
 	{
-        private:
+		private:
 		// Singleton
 		static State *_singleton;
 
@@ -39,7 +39,7 @@ namespace EJV
 		virtual ~State() {}
 		State& operator=(const State& orig) { return *this; }
 
-        public:
+		public:
 		typedef std::map<const std::string, World*> WorldMap; // Temporary
 
 		WorldMap loadedWorlds;

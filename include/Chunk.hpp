@@ -19,9 +19,9 @@
  *
  */
 
-#define CHUNK_WIDTH  32
-#define CHUNK_LENGTH 32
-#define CHUNK_HEIGHT 32
+#define CHUNK_WIDTH  16
+#define CHUNK_LENGTH 16
+#define CHUNK_HEIGHT 16
 
 namespace EJV
 {
