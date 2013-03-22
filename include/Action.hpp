@@ -56,11 +56,50 @@ namespace EJV
 		KEY_DROP
 	};
 
-	struct Action
-	{
-		ActionType type;
-		void *data;
-	};
+	namespace Action
+    {
+        struct Base
+        {
+            const ActionType type;
+
+            inline Base(ActionType t) : type(t >= ACTION_COUNT ? ACTION_UNKNOWN : t) {}
+
+            // TODO: Add more info (like player, world e.t.c.)
+        };
+
+        struct ItemUse : public Base
+        {
+            const ItemUseType useType;
+
+            inline ItemUse(ItemUseType _useType) : Base(ACTION_ITEM_USE), useType(_useType) {}
+        };
+
+        struct ItemChange : public Base
+        {
+            const unsigned short newSlot;
+
+            inline ItemChange(unsigned short _newSlot) : Base(ACTION_ITEM_USE), newSlot(_newSlot) {}
+        };
+
+        struct KeyPress : public Base
+        {
+            const KeyboardKey key;
+
+            inline KeyPress(KeyboardKey _key) : Base(ACTION_KEY_PRESS), key(_key) {}
+        };
+
+        struct MenuSelect : public Base
+        {
+            inline MenuSelect() : Base(ACTION_MENU_SELECT) {}
+        };
+
+        struct Chat : public Base
+        {
+            const std::string message;
+
+            inline Chat(const std::string& _message) : Base(ACTION_CHAT), message(_message) {}
+        };
+    }
 }
 
 #endif //ACTION_INCLUDED

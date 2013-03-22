@@ -70,7 +70,7 @@
 		<Unit filename="modules/Loaders/Anvil/AnvilLoader.cpp">
 			<Option target="Release-Modules" />
 		</Unit>
-		<Unit filename="src/GlobalState.cpp">
+		<Unit filename="src/Core.cpp">
 			<Option target="Release-Core" />
 		</Unit>
 		<Extensions>

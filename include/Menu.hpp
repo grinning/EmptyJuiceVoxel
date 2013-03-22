@@ -32,11 +32,35 @@ namespace EJV
 		MENU_COUNT
 	};
 
-	struct Menu
-	{
-		MenuType type;
-		void *data;
-	};
+	namespace Menu
+    {
+        struct Base
+        {
+            const MenuType type;
+
+            inline Base(MenuType t) : type(t >= MENU_COUNT ? MENU_UNKNOWN : t) {}
+        };
+
+        struct Main : public Base
+        {
+            inline Main() : Base(MENU_MAIN) {}
+        };
+
+        struct Singleplayer : public Base
+        {
+            inline Singleplayer() : Base(MENU_SINGLEPLAYER) {}
+        };
+
+        struct Multiplayer : public Base
+        {
+            inline Multiplayer() : Base(MENU_MULTIPLAYER) {}
+        };
+
+        struct Block : public Base
+        {
+            inline Block() : Base(MENU_BLOCK) {}
+        };
+    }
 }
 
 #endif //MENU_INCLUDED
