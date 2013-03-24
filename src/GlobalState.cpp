@@ -3,32 +3,33 @@
 // Temp headers
 #include "Loader.hpp"
 #include "Generator.hpp"
+#include "Rules.hpp"
 
 namespace EJV
 {
-    Chunk* World::getChunk(const Point3D& point) const
+    Chunk* World::getChunk(const Point3D& point)
     {
         Chunk*& chunk = loadedChunks[point];
 
-        if (chunk) return temp;
+        if (chunk) return chunk;
 
         // If chunk isn't loaded, try to load it
         chunk = loadChunk(point);
 
         // If chunk doesn't exist, generate it
-        if (!chunk) chunk = generateChunk(point);
+        if (!chunk) chunk = generateChunk(point.x, point.y, point.z);
 
         return chunk;
     }
 
-    Chunk* loadChunk(const Point3D& point)
+    Chunk* World::loadChunk(const Point3D& point)
     {
         Chunk*& chunk = loadedChunks[point];
 
         chunk = loadChunk(point);
 
         // If chunk doesn't exist, generate it
-        if (!chunk) chunk = generateChunk(point);
+        if (!chunk) chunk = generateChunk(point.x, point.y, point.z);
 
         return chunk;
     }
@@ -37,14 +38,14 @@ namespace EJV
     {
         ChunkMap::iterator it = loadedChunks.find(point);
 
-        // Make sure chunk is laoded
+        // Make sure chunk is loded
         if (it == loadedChunks.end()) return;
 
         // Save chunk to disk
-        putChunk(point.x, point.y, point.z, chunk);
+        putChunk(point.x, point.y, point.z, it->second);
 
         // Unload chunk
-        delete *it;
+        delete it->second;
 
         loadedChunks.erase(it);
     }
@@ -65,9 +66,9 @@ namespace EJV
     bool State::gameTick()
     {
         // Update chunks
-        for (WorldList::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
+        for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
         {
-            (*it)->updateChunks();
+            it->second->updateChunks();
         }
 
         // Pass control to modules
@@ -77,5 +78,14 @@ namespace EJV
         }
 
         actions.clear();
+
+        return false;
+    }
+
+    unsigned short State::registerBlock(const BlockInfo& info)
+    {
+        _registeredBlocks.push_back(info);
+
+        return _registeredBlocks.size() - 1;
     }
 }

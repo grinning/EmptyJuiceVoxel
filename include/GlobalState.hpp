@@ -13,6 +13,7 @@
 #include <map>
 #include <queue>
 #include <list>
+#include <vector>
 
 #include <cstring>
 
@@ -25,7 +26,12 @@ namespace EJV
 {
     struct Point3D
     {
-        unsigned int x, y, z;
+        int x, y, z;
+
+        virtual bool operator<(const Point3D& point) const
+        {
+            return x < point.x && y < point.y && z < point.z;
+        }
     };
 
 	struct World
@@ -43,7 +49,7 @@ namespace EJV
          * Takes care of loading and generating chunks
          *
          */
-		Chunk* getChunk(const Point3D& point) const;
+		Chunk* getChunk(const Point3D& point);
 
 		/** Loads a chunk from the disk (Discards any unsaved changes) */
 		Chunk* loadChunk(const Point3D& point);
@@ -58,6 +64,14 @@ namespace EJV
         void updateChunks();
 	};
 
+	/** Stores information about a block */
+	struct BlockInfo
+	{
+	    // WIP
+
+	    double hardness;
+	};
+
 	class State
 	{
 		private:
@@ -69,6 +83,11 @@ namespace EJV
             State(const State& orig) {}
             virtual ~State() {}
             State& operator=(const State& orig) { return *this; }
+
+        protected:
+            typedef std::vector<BlockInfo> BlockList;
+
+            BlockList _registeredBlocks;
 
             bool gameTick();
 
@@ -88,6 +107,17 @@ namespace EJV
             {
                 while (1) if (gameTick()) return;
             }
+
+            // BLOCK INFORMATION
+            BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
+
+            const BlockInfo& getBlockInfo(const unsigned short index) const { return _registeredBlocks.at(index); }
+
+            unsigned short registerBlock(const BlockInfo& info);
+
+            unsigned short getNumRegisteredBlocks() const { return _registeredBlocks.size(); }
+
+            bool isRegistered(const unsigned short index) const { return index < _registeredBlocks.size(); }
 	};
 }
 
