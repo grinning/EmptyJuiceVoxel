@@ -48,7 +48,7 @@ extern "C"
 	 * @param m Menu to display.
 	 * @param playerName Name of Player to show menu.
 	 */
-	void displayMenu(EJV::Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
+	void displayMenu(EJV::Menu::Base *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
 }
 
 // EXTERNAL

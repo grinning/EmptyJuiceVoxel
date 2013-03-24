@@ -14,10 +14,10 @@ namespace EJV
         if (chunk) return chunk;
 
         // If chunk isn't loaded, try to load it
-        chunk = loadChunk(point);
+        chunk = loader->loadChunk(point.x, point.y, point.z);
 
         // If chunk doesn't exist, generate it
-        if (!chunk) chunk = generateChunk(point.x, point.y, point.z);
+        if (!chunk) chunk = generator->generateChunk(point.x, point.y, point.z);
 
         return chunk;
     }
@@ -26,10 +26,10 @@ namespace EJV
     {
         Chunk*& chunk = loadedChunks[point];
 
-        chunk = loadChunk(point);
+        chunk = loader->loadChunk(point.x, point.y, point.z);
 
         // If chunk doesn't exist, generate it
-        if (!chunk) chunk = generateChunk(point.x, point.y, point.z);
+        if (!chunk) chunk = generator->generateChunk(point.x, point.y, point.z);
 
         return chunk;
     }
@@ -42,7 +42,7 @@ namespace EJV
         if (it == loadedChunks.end()) return;
 
         // Save chunk to disk
-        putChunk(point.x, point.y, point.z, it->second);
+        loader->putChunk(point.x, point.y, point.z, it->second);
 
         // Unload chunk
         delete it->second;
@@ -54,7 +54,7 @@ namespace EJV
     {
         for (ChunkMap::const_iterator it = loadedChunks.begin(); it != loadedChunks.end(); ++it)
         {
-            putChunk(it->first.x, it->first.y, it->first.z, it->second);
+            loader->putChunk(it->first.x, it->first.y, it->first.z, it->second);
         }
     }
 
@@ -103,12 +103,29 @@ namespace EJV
         // Pass control to modules
         for (ActionList::iterator it = actions.begin(); it != actions.end(); ++it)
         {
-            tick(*it);
+            for (RuleModuleList::iterator mod = _rules.begin(); mod != _rules.end(); ++mod)
+            {
+                (*mod)->tick(*it);
+            }
         }
 
         actions.clear();
 
         return false;
+    }
+
+    void State::registerRuleModule(RuleModule* module)
+    {
+        if (!module) return;
+
+        _rules.push_back(module);
+    }
+
+    void State::registerUIModule(UIModule* module)
+    {
+        if (!module) return;
+
+        _uis.push_back(module);
     }
 
     unsigned short State::registerBlock(const BlockInfo& info)

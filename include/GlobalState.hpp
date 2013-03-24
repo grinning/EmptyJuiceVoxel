@@ -10,6 +10,8 @@
 #include "Chunk.hpp"
 #include "Action.hpp"
 
+#include "Module.hpp"
+
 #include <map>
 #include <queue>
 #include <list>
@@ -45,17 +47,27 @@ namespace EJV
 
 	struct World
 	{
-		typedef std::map<Point3D, Chunk*> ChunkMap;
-
-		typedef std::list<std::pair<Point3D, Chunk*> > ChunkUpdatesList;
+		// Entities
 
 		typedef std::list<Entity*> EntityList;
 
 		EntityList entities;
 
+		// Chunks
+
+		typedef std::map<Point3D, Chunk*> ChunkMap;
+
+		typedef std::list<std::pair<Point3D, Chunk*> > ChunkUpdatesList;
+
 		ChunkMap loadedChunks;
 
 		ChunkUpdatesList chunkUpdates;
+
+		// Modules
+
+		GeneratorModule* generator;
+
+		LoaderModule* loader;
 
         /** \brief Fetches a chunk and updates the cache
          *
@@ -132,6 +144,12 @@ namespace EJV
             ItemList   _registeredItems;
             EntityList _registeredEntities;
 
+            typedef std::list<RuleModule*> RuleModuleList;
+            typedef std::list<UIModule*>   UIModuleList;
+
+            RuleModuleList _rules;
+            UIModuleList   _uis;
+
             bool gameTick();
 
 		public:
@@ -150,6 +168,10 @@ namespace EJV
             {
                 while (1) if (gameTick()) return;
             }
+
+            // MODULES
+            void registerRuleModule(RuleModule* module);
+            void registerUIModule(UIModule* module);
 
             // INFORMATION
             BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
