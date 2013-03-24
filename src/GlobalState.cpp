@@ -58,8 +58,9 @@ namespace EJV
         }
     }
 
-    void World::updateChunks()
+    void World::update()
     {
+        // Update blocks
         for (ChunkUpdatesList::iterator it = chunkUpdates.begin(); it != chunkUpdates.end(); ++it)
         {
             Chunk*& chunk = it->second;
@@ -76,14 +77,27 @@ namespace EJV
                 info.updateFunc(this, it->first, info);
             }
         }
+
+        // Update entities
+        for (EntityList::iterator it = entities.begin(); it != entities.end(); ++it)
+        {
+            // Fetch entity information
+            EntityInfo& info = State::GET().getEntityInfo((*it)->type);
+
+            // Update entity
+            if (info.updateFunc)
+            {
+                info.updateFunc(this, *it, info);
+            }
+        }
     }
 
     bool State::gameTick()
     {
-        // Update chunks
+        // Update worlds
         for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
         {
-            it->second->updateChunks();
+            it->second->update();
         }
 
         // Pass control to modules

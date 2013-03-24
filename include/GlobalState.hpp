@@ -34,11 +34,24 @@ namespace EJV
         }
     };
 
+    struct Entity
+    {
+        unsigned short type;
+
+        // TODO: Dynamic ownership
+
+        double posX, posY, posZ;
+    };
+
 	struct World
 	{
 		typedef std::map<Point3D, Chunk*> ChunkMap;
 
 		typedef std::list<std::pair<Point3D, Chunk*> > ChunkUpdatesList;
+
+		typedef std::list<Entity*> EntityList;
+
+		EntityList entities;
 
 		ChunkMap loadedChunks;
 
@@ -61,7 +74,7 @@ namespace EJV
         void saveWorld() const;
 
         /** Updates chunks */
-        void updateChunks();
+        void update();
 	};
 
 	/** Stores information about a block */
@@ -89,7 +102,7 @@ namespace EJV
 	/** Stores information about an entity */
 	struct EntityInfo
 	{
-	    typedef void (*UpdateFunction)(World* world, const Point3D& position, BlockInfo& info);
+	    typedef void (*UpdateFunction)(World* world, Entity* entity, EntityInfo& info);
 
 	    UpdateFunction updateFunc; // If null, use the standard item update function
 
