@@ -38,7 +38,7 @@ namespace EJV
 	{
 		typedef std::map<Point3D, Chunk*> ChunkMap;
 
-		typedef std::queue<std::pair<Point3D, Chunk*> > ChunkUpdatesList;
+		typedef std::list<std::pair<Point3D, Chunk*> > ChunkUpdatesList;
 
 		ChunkMap loadedChunks;
 
@@ -67,9 +67,35 @@ namespace EJV
 	/** Stores information about a block */
 	struct BlockInfo
 	{
-	    // WIP
+	    typedef void (*UpdateFunction)(World* world, const Point3D& position, BlockInfo& info);
+
+	    UpdateFunction updateFunc; // If null use standard block update function
 
 	    double hardness;
+	};
+
+	/** Stores information about an item */
+	struct ItemInfo
+	{
+	    typedef void (*UpdateFunction)(ItemInfo& info);
+
+	    UpdateFunction updateFunc; // If null, use the standard item update function
+
+	    double maxDurability;
+
+	    double attackStrength;
+	};
+
+	/** Stores information about an entity */
+	struct EntityInfo
+	{
+	    typedef void (*UpdateFunction)(World* world, const Point3D& position, BlockInfo& info);
+
+	    UpdateFunction updateFunc; // If null, use the standard item update function
+
+	    double maxHealth;
+
+	    double attackStrength;
 	};
 
 	class State
@@ -85,9 +111,13 @@ namespace EJV
             State& operator=(const State& orig) { return *this; }
 
         protected:
-            typedef std::vector<BlockInfo> BlockList;
+            typedef std::vector<BlockInfo>  BlockList;
+            typedef std::vector<ItemInfo>   ItemList;
+            typedef std::vector<EntityInfo> EntityList;
 
-            BlockList _registeredBlocks;
+            BlockList  _registeredBlocks;
+            ItemList   _registeredItems;
+            EntityList _registeredEntities;
 
             bool gameTick();
 
@@ -108,16 +138,27 @@ namespace EJV
                 while (1) if (gameTick()) return;
             }
 
-            // BLOCK INFORMATION
+            // INFORMATION
             BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
-
             const BlockInfo& getBlockInfo(const unsigned short index) const { return _registeredBlocks.at(index); }
 
+            ItemInfo& getItemInfo(const unsigned short index) { return _registeredItems.at(index); }
+            const ItemInfo& getItemInfo(const unsigned short index) const { return _registeredItems.at(index); }
+
+            EntityInfo& getEntityInfo(const unsigned short index) { return _registeredEntities.at(index); }
+            const EntityInfo& getEntityInfo(const unsigned short index) const { return _registeredEntities.at(index); }
+
             unsigned short registerBlock(const BlockInfo& info);
+            unsigned short registerItem(const ItemInfo& info);
+            unsigned short registerEntity(const EntityInfo& info);
 
             unsigned short getNumRegisteredBlocks() const { return _registeredBlocks.size(); }
+            unsigned short getNumRegisteredItems() const { return _registeredItems.size(); }
+            unsigned short getNumRegisteredEntities() const { return _registeredEntities.size(); }
 
-            bool isRegistered(const unsigned short index) const { return index < _registeredBlocks.size(); }
+            bool isBlockRegistered(const unsigned short index) const { return index < _registeredBlocks.size(); }
+            bool isItemRegistered(const unsigned short index) const { return index < _registeredItems.size(); }
+            bool isEntityRegistered(const unsigned short index) const { return index < _registeredEntities.size(); }
 	};
 }
 

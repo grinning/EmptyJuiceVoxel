@@ -60,7 +60,22 @@ namespace EJV
 
     void World::updateChunks()
     {
-        // Call module methods
+        for (ChunkUpdatesList::iterator it = chunkUpdates.begin(); it != chunkUpdates.end(); ++it)
+        {
+            Chunk*& chunk = it->second;
+
+            // Make sure that the chunk is valid
+            if (!chunk) continue;
+
+            // Fetch block information
+            BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[it->first.x][it->first.y][it->first.z]);
+
+            // Update block
+            if (info.updateFunc)
+            {
+                info.updateFunc(this, it->first, info);
+            }
+        }
     }
 
     bool State::gameTick()
@@ -87,5 +102,19 @@ namespace EJV
         _registeredBlocks.push_back(info);
 
         return _registeredBlocks.size() - 1;
+    }
+
+    unsigned short State::registerItem(const ItemInfo& info)
+    {
+        _registeredItems.push_back(info);
+
+        return _registeredItems.size() - 1;
+    }
+
+    unsigned short State::registerEntity(const EntityInfo& info)
+    {
+        _registeredEntities.push_back(info);
+
+        return _registeredEntities.size() - 1;
     }
 }

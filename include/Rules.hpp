@@ -40,7 +40,7 @@ extern "C"
 
 	 * @param act List of actions that players have taken.
 	 */
-	void tick(EJV::Action *act);
+	void tick(EJV::Action::Base *act);
 }
 
 // EXTERNAL
@@ -90,6 +90,6 @@ extern "C" void setMetadata(const std::string& which, EJV::Metadata* data);
  * @param m Menu to display.
  * @param playerName name of the player to show the menu.
  */
-extern "C" void displayMenu(EJV::Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
+//extern "C" void displayMenu(EJV::Menu *m, const std::string& playerName); // I think a pointer to a player structure would be more suitable -Andrew
 
 #endif //RULES_INCLUDED
