@@ -8,40 +8,70 @@
 #define LOADER_INCLUDED
 
 #include <string>
+#include <map>
+#include <fstream>
 
-#include "Chunk.hpp"
-#include "Metadata.hpp"
+#include "Loader.hpp"
+#include "mNBT/RegionLoader.hpp"
 
 /**
- * @file Interface for loader modules
+ * @file Loader module for the Anvil File Format.
  *
  */
+
+/**
+ * Map of chunk location to RegionLoader.
+ */
+
+struct RegionData {
+	mNBT::RegionLoader* loader;
+	short count; //Used to know when to empty a regionLoader.
+};
+
+std::map<std::pair<int,int>,RegionData*> loadMap;
 
 extern "C"
 {
 	/**
 	 * Run when the module is loaded.
-	 * This allows for the module to
-	 * initialize based on configurations.
+	 * Does not load any chunks.
 	 */
-	void init();
+	void init() {}
 
 	/**
 	 * Run when the module is unloaded.
-	 * This allows modules to close files,
-	 * end connections, and clean up.
+	 * Saves any files left.
 	 */
-	void destroy();
+	void destroy() {
+		for (auto& it: loadMap) {
+			it->second->loader->save();
+			delete it->second->loader;
+			delete it->second;
+		}
+		loadMap.clear();
+		return;
+	}
 
 	/**
 	 * Get a chunk from disc.
-	 *
-	 * @param x X chunk coord.
-	 * @param y Y chunk coord.
-	 * @param z Z chunk coord.
-	 * @return Pointer to a chunk if sucess, NULL otherwise.
 	 */
-	EJV::Chunk *loadChunk(int x, int y, int z);
+	EJV::Chunk *loadChunk(int x, int y, int z) {
+		mNBT::Tag* chunk;
+		std::pair <int,int> coords(x >> 5, z >> 5);
+		if (loadMap.count(coords)) {
+			chunk = loadMap[coords]->loader->getChunk(x % 32, z % 32);
+		} else {
+		mNBT::RegionLoader* newRegion = new mNBT::RegionLoader("world",x>>5,z>>5);
+		RegionData* newLoader = new RegionData;
+		newLoader->count = 1;
+		newLoader->loader = newRegion;
+		loadMap[coords] = newLoader;
+		chunk = newRegion->getChunk(x,z);
+		}
+		if (chunk == NULL)
+			return NULL;
+		
+	}
 
 	/**
 	 * Saves a chunk to the disc.

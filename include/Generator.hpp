@@ -31,6 +31,16 @@ extern "C"
 	void destroy();
 
 	/**
+	 * Sets the name of the world to generate.
+	 * Should be called before generateChunk.
+	 * Used for special world configs, including
+	 * seeds in the config file.
+	 *
+	 * @param worldName Name of the world.
+	 */
+    void setWorldName(const std::string& worldName);
+
+	/**
 	 * Provides a chunk.
 	 *
 	 * @param x X chunk coord.

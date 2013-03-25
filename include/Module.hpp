@@ -62,13 +62,22 @@ namespace EJV
 
     struct LoaderModule : public Module
     {
+        typedef void (*SetWorldNameFunc)(std::string& name);
+
         typedef Chunk* (*LoadChunkFunc)(int x, int y, int z);
         typedef void (*PutChunkFunc)(int x, int y, int z, Chunk*);
         typedef void (*ReleaseChunkFunc)(int x, int y, int z, Chunk*);
 
+        typedef Metadata* (*GetMetadataFunc)(std::string& which);
+        typedef void (*SetMetadataFunc)(std::string& which, Metadata* data)l
+
+
+        SetWorldNameFunc setWorldName;
         LoadChunkFunc loadChunk;
         PutChunkFunc putChunk;
         ReleaseChunkFunc releaseChunk;
+        GetMetadataFunc getMetadata;
+        SetMetadataFunc setMetadata;
 
         virtual void loadFunctions();
     };
@@ -76,8 +85,10 @@ namespace EJV
     struct GeneratorModule : public Module
     {
         typedef Chunk* (*GenerateChunkFunc)(int x, int y, int z);
+        typedef void (*SetWorldNameFunc)(std::string& name);
 
         GenerateChunkFunc generateChunk;
+        SetWorldNameFunc setWorldName;
 
         virtual void loadFunctions();
     };

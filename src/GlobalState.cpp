@@ -14,6 +14,11 @@ namespace EJV
         return _singleton ? *_singleton : *(_singleton = new State);
     }
 
+    void World::initProviders() {
+        generator->setWorldName(worldName);
+        loader->setWorldName(worldName);
+    }
+
     Chunk* World::getChunk(const Point3D& point)
     {
         Chunk*& chunk = loadedChunks[point];

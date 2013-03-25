@@ -12,8 +12,8 @@
 
 #include <vector>
 
-#include "Block.h"
-#include "Tag.h"
+#include "Block.hpp"
+#include "Tag.hpp"
 
 /// mNBT system namespace.
 namespace mNBT

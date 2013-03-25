@@ -50,6 +50,9 @@ namespace EJV
         loadChunk = (LoadChunkFunc) fetchFunctionPointer("loadChunk");
         putChunk = (PutChunkFunc) fetchFunctionPointer("putChunk");
         releaseChunk = (ReleaseChunkFunc) fetchFunctionPointer("releaseChuk");
+        setWorldName = (SetWorldNameFunc) fetchFunctionPointer("setWorldName");
+        getMetadata = (GetMetadataFunc) fetchFunctionPointer("getMetadata");
+        setMetadata = (SetMetadataFunc) fetchFUnctionPointer("setMetadata");
     }
 
     void GeneratorModule::loadFunctions()
@@ -57,5 +60,6 @@ namespace EJV
         Module::loadFunctions();
 
         generateChunk = (GenerateChunkFunc) fetchFunctionPointer("generateChunk");
+        setWorldName = (SetWorldNameFunc) fetchFunctionPointer("setWorldName");
     }
 }

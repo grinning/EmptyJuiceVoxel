@@ -199,6 +199,14 @@ namespace mNBT
 			 * @throw Error if Block throws. Very unlikely.
 			 */
 			virtual void writePayload(Block* out) throw(NBTErr)=0;
+
+			/*-----------------miscellaneous-----------------*/
+
+			/**
+			 * Cleans out the notchTags map. Used by applications
+			 * to reove any valgrind warnings.
+			 */
+			static void deleteNotchTags();
 	};
 
 	/**

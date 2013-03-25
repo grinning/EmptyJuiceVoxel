@@ -56,6 +56,10 @@ namespace EJV
 
 	struct World
 	{
+	    // Name
+
+	    std::string worldName;
+
 		// Entities
 
 		typedef std::list<Entity*> EntityList;
@@ -84,6 +88,12 @@ namespace EJV
 
 		// Functions
 
+		/** Sets the world's name. */
+		World(std::string& name): worldName(name) {}
+
+		/** Initializes the loader/generator.*/
+        void initProviders();
+
         /** \brief Fetches a chunk and updates the cache
          *
          * Takes care of loading and generating chunks
@@ -102,6 +112,7 @@ namespace EJV
 
         /** Updates chunks */
         void update();
+
 	};
 
 	/** Stores information about a block */

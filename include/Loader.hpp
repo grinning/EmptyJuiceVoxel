@@ -34,6 +34,14 @@ extern "C"
 	void destroy();
 
 	/**
+	 * Sets the worldName for the loader.
+     * Should be called before loadChunk().
+	 *
+	 * @param name Name of the world.
+	 */
+    void setWorldName(const std::string& worldName);
+
+	/**
 	 * Get a chunk from disc.
 	 *
 	 * @param x X chunk coord.
