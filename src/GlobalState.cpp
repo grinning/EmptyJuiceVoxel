@@ -75,19 +75,7 @@ namespace EJV
         // Update blocks
         for (ChunkUpdatesList::iterator it = chunkUpdates.begin(); it != chunkUpdates.end(); ++it)
         {
-            Chunk*& chunk = it->second;
-
-            // Make sure that the chunk is valid
-            if (!chunk) continue;
-
-            // Fetch block information
-            BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[it->first.x][it->first.y][it->first.z]);
-
-            // Update block
-            if (info.updateFunc)
-            {
-                info.updateFunc(this, it->first, info);
-            }
+            updateBlock(it->second, it->first);
         }
 
         // Update entities
@@ -104,28 +92,19 @@ namespace EJV
         }
     }
 
-    bool State::gameTick()
+    void World::updateBlock(Chunk* chunk, const Point3D& point)
     {
-        // Update worlds
-        for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
+        // Make sure that the chunk is valid
+        if (!chunk) return;
+
+        // Fetch block information
+        BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z]);
+
+        // Update block
+        if (info.updateFunc)
         {
-            ++it->second->ticks;
-
-            it->second->update();
+            info.updateFunc(this, point, info);
         }
-
-        // Pass control to modules
-        for (ActionList::iterator it = actions.begin(); it != actions.end(); ++it)
-        {
-            for (RuleModuleList::iterator mod = _rules.begin(); mod != _rules.end(); ++mod)
-            {
-                (*mod)->tick(*it);
-            }
-        }
-
-        actions.clear();
-
-        return true;
     }
 
     void State::run()

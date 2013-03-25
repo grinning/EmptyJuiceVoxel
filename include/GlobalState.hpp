@@ -113,6 +113,8 @@ namespace EJV
         /** Updates chunks */
         void update();
 
+        /** Updates a block */
+        void updateBlock(Chunk* chunk, const Point3D& point);
 	};
 
 	/** Stores information about a block */
