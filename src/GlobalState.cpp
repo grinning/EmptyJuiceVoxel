@@ -97,6 +97,8 @@ namespace EJV
         // Update worlds
         for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
         {
+            ++it->second->ticks;
+
             it->second->update();
         }
 
@@ -114,6 +116,27 @@ namespace EJV
         return false;
     }
 
+    void State::run()
+    {
+        while (gameTick())
+        {
+            ++_ticks;
+
+            // Get current time
+            std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+
+            // Calculate delta time
+            std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double> >(now - _before);
+
+            double dt = time_span.count();
+
+            // Wait
+            //if (dt < _tickDuration) std::thread::sleep_for();
+
+            _before = std::chrono::steady_clock::now();
+        }
+    }
+
     void State::registerRuleModule(RuleModule* module)
     {
         if (!module) return;
@@ -128,21 +151,21 @@ namespace EJV
         _uis.push_back(module);
     }
 
-    unsigned short State::registerBlock(const BlockInfo& info)
+    State::ID State::registerBlock(const BlockInfo& info)
     {
         _registeredBlocks.push_back(info);
 
         return _registeredBlocks.size() - 1;
     }
 
-    unsigned short State::registerItem(const ItemInfo& info)
+    State::ID State::registerItem(const ItemInfo& info)
     {
         _registeredItems.push_back(info);
 
         return _registeredItems.size() - 1;
     }
 
-    unsigned short State::registerEntity(const EntityInfo& info)
+    State::ID State::registerEntity(const EntityInfo& info)
     {
         _registeredEntities.push_back(info);
 

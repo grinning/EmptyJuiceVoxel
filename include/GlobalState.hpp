@@ -12,12 +12,18 @@
 
 #include "Module.hpp"
 
+// STL
 #include <map>
 #include <queue>
 #include <list>
 #include <vector>
 
+// C
 #include <cstring>
+
+// C++11
+#include <chrono>
+#include <thread>
 
 /**
  * @file Storage for the global state
@@ -69,6 +75,12 @@ namespace EJV
 
 		LoaderModule* loader;
 
+		// Time
+
+		uint64_t ticks;
+
+		// Functions
+
         /** \brief Fetches a chunk and updates the cache
          *
          * Takes care of loading and generating chunks
@@ -94,7 +106,7 @@ namespace EJV
 	{
 	    typedef void (*UpdateFunction)(World* world, const Point3D& position, BlockInfo& info);
 
-	    UpdateFunction updateFunc; // If null use standard block update function
+	    UpdateFunction updateFunc; // If null, use standard block update function
 
 	    double hardness;
 	};
@@ -150,11 +162,23 @@ namespace EJV
             RuleModuleList _rules;
             UIModuleList   _uis;
 
+            // Timing
+
+            unsigned int _tickDuration;
+
+            uint64_t _ticks;
+
+            std::chrono::steady_clock::time_point _before;
+
+            // Functions
+
             bool gameTick();
 
 		public:
             typedef std::map<const std::string, World*> WorldMap;
             typedef std::list<Action::Base*> ActionList;
+
+            typedef unsigned short ID;
 
             WorldMap loadedWorlds;
             ActionList actions;
@@ -164,10 +188,7 @@ namespace EJV
                 return _singleton ? *_singleton : *(_singleton = new State);
             }
 
-            void run()
-            {
-                while (1) if (gameTick()) return;
-            }
+            void run();
 
             // MODULES
             void registerRuleModule(RuleModule* module);
@@ -183,17 +204,26 @@ namespace EJV
             EntityInfo& getEntityInfo(const unsigned short index) { return _registeredEntities.at(index); }
             const EntityInfo& getEntityInfo(const unsigned short index) const { return _registeredEntities.at(index); }
 
-            unsigned short registerBlock(const BlockInfo& info);
-            unsigned short registerItem(const ItemInfo& info);
-            unsigned short registerEntity(const EntityInfo& info);
+            ID registerBlock(const BlockInfo& info);
+            ID registerItem(const ItemInfo& info);
+            ID registerEntity(const EntityInfo& info);
 
             unsigned short getNumRegisteredBlocks() const { return _registeredBlocks.size(); }
             unsigned short getNumRegisteredItems() const { return _registeredItems.size(); }
             unsigned short getNumRegisteredEntities() const { return _registeredEntities.size(); }
 
-            bool isBlockRegistered(const unsigned short index) const { return index < _registeredBlocks.size(); }
-            bool isItemRegistered(const unsigned short index) const { return index < _registeredItems.size(); }
-            bool isEntityRegistered(const unsigned short index) const { return index < _registeredEntities.size(); }
+            bool isBlockRegistered(const ID index) const { return index < _registeredBlocks.size(); }
+            bool isItemRegistered(const ID index) const { return index < _registeredItems.size(); }
+            bool isEntityRegistered(const ID index) const { return index < _registeredEntities.size(); }
+
+            // SPEED
+            unsigned int getTickDuration() const { return _tickDuration; }
+            double       getTickDurationSeconds() const { return _tickDuration / 1000.0; }
+
+            void setTickDuration(const unsigned int& speed)  { _tickDuration = speed; }
+            void setTickDurationSeconds(const double& speed) { _tickDuration = speed * 1000.0; }
+
+            uint64_t getTicks() const { return _ticks; }
 	};
 }
 

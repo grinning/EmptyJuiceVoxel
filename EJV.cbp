@@ -15,6 +15,9 @@
 				<Compiler>
 					<Add directory="include" />
 				</Compiler>
+				<Linker>
+					<Add library="dl" />
+				</Linker>
 			</Target>
 			<Target title="Release-Modules">
 				<Option output="EJV" prefix_auto="1" extension_auto="1" />
@@ -55,6 +58,9 @@
 		<Unit filename="include/Metadata.hpp">
 			<Option target="Release-Core" />
 		</Unit>
+		<Unit filename="include/Module.hpp">
+			<Option target="Release-Core" />
+		</Unit>
 		<Unit filename="include/Rules.hpp">
 			<Option target="Release-Core" />
 		</Unit>
@@ -70,7 +76,10 @@
 		<Unit filename="modules/Loaders/Anvil/AnvilLoader.cpp">
 			<Option target="Release-Modules" />
 		</Unit>
-		<Unit filename="src/Core.cpp">
+		<Unit filename="src/GlobalState.cpp">
+			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="src/Module.cpp">
 			<Option target="Release-Core" />
 		</Unit>
 		<Extensions>
