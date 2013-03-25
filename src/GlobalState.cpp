@@ -7,6 +7,13 @@
 
 namespace EJV
 {
+    State *State::_singleton = 0;
+
+    State& State::GET()
+    {
+        return _singleton ? *_singleton : *(_singleton = new State);
+    }
+
     Chunk* World::getChunk(const Point3D& point)
     {
         Chunk*& chunk = loadedChunks[point];
@@ -113,7 +120,7 @@ namespace EJV
 
         actions.clear();
 
-        return false;
+        return true;
     }
 
     void State::run()

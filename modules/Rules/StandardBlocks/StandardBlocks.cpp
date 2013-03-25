@@ -1,5 +1,7 @@
 #include "StandardBlocks.hpp"
 
+#include <iostream>
+
 namespace StandardBlocks
 {
     void init()
@@ -17,5 +19,7 @@ namespace StandardBlocks
         BLOCK_GRASS       = core.registerBlock(grass);
         BLOCK_DIRT        = core.registerBlock(dirt);
         BLOCK_COBBLESTONE = core.registerBlock(cobblestone);
+
+        std::cout << "Loaded StandardBlocks" << std::endl;
     }
 }

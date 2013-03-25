@@ -34,6 +34,9 @@ namespace EJV
 {
     struct Point3D
     {
+        Point3D() {}
+        Point3D(int _x, int _y, int _z) : x(_x), y(_y), z (_x) {}
+
         int x, y, z;
 
         virtual bool operator<(const Point3D& point) const
@@ -109,6 +112,10 @@ namespace EJV
 	    UpdateFunction updateFunc; // If null, use standard block update function
 
 	    double hardness;
+
+	    BlockInfo() {}
+
+	    BlockInfo(const double& _hardness) : hardness(_hardness) {}
 	};
 
 	/** Stores information about an item */
@@ -121,6 +128,11 @@ namespace EJV
 	    double maxDurability;
 
 	    double attackStrength;
+
+	    ItemInfo() {}
+
+	    ItemInfo(const double& _maxDurability,
+                 const double& _attackStrength) : maxDurability(_maxDurability), attackStrength(_attackStrength) {}
 	};
 
 	/** Stores information about an entity */
@@ -133,6 +145,8 @@ namespace EJV
 	    double maxHealth;
 
 	    double attackStrength;
+
+	    EntityInfo() {}
 	};
 
 	class State
@@ -183,10 +197,8 @@ namespace EJV
             WorldMap loadedWorlds;
             ActionList actions;
 
-            inline static State &GET()
-            {
-                return _singleton ? *_singleton : *(_singleton = new State);
-            }
+            // MUST NOT BE INLINED
+            static State &GET();
 
             void run();
 
