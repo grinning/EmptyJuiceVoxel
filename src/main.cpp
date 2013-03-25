@@ -39,7 +39,7 @@ int main()
     CORE.registerRuleModule(standardBlocks);
     CORE.registerUIModule(gfx);
 
-    World* mainWorld = new World;
+    World* mainWorld = new World("main");
 
     mainWorld->loader = anvil;
     mainWorld->generator = flatland;

@@ -69,13 +69,14 @@ namespace EJV
         typedef void (*ReleaseChunkFunc)(int x, int y, int z, Chunk*);
 
         typedef Metadata* (*GetMetadataFunc)(std::string& which);
-        typedef void (*SetMetadataFunc)(std::string& which, Metadata* data)l
-
+        typedef void (*SetMetadataFunc)(std::string& which, Metadata* data);
 
         SetWorldNameFunc setWorldName;
+
         LoadChunkFunc loadChunk;
         PutChunkFunc putChunk;
         ReleaseChunkFunc releaseChunk;
+
         GetMetadataFunc getMetadata;
         SetMetadataFunc setMetadata;
 

@@ -14,7 +14,8 @@ namespace EJV
         return _singleton ? *_singleton : *(_singleton = new State);
     }
 
-    void World::initProviders() {
+    void World::initProviders()
+    {
         generator->setWorldName(worldName);
         loader->setWorldName(worldName);
     }
@@ -105,6 +106,30 @@ namespace EJV
         {
             info.updateFunc(this, point, info);
         }
+    }
+
+    bool State::gameTick()
+    {
+        // Update worlds
+        for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
+        {
+            ++it->second->ticks;
+
+            it->second->update();
+        }
+
+        // Pass control to modules
+        for (ActionList::iterator it = actions.begin(); it != actions.end(); ++it)
+        {
+            for (RuleModuleList::iterator mod = _rules.begin(); mod != _rules.end(); ++mod)
+            {
+                (*mod)->tick(*it);
+            }
+        }
+
+        actions.clear();
+
+        return true;
     }
 
     void State::run()

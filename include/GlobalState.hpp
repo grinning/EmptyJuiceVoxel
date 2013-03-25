@@ -89,7 +89,7 @@ namespace EJV
 		// Functions
 
 		/** Sets the world's name. */
-		World(std::string& name): worldName(name) {}
+		World(const std::string& name): worldName(name) {}
 
 		/** Initializes the loader/generator.*/
         void initProviders();
