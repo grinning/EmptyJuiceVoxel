@@ -8,35 +8,43 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Release-Core">
-				<Option output="bin/EJV" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/EJV" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-pedantic-errors" />
-					<Add option="-pedantic" />
-					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="dl" />
 				</Linker>
 			</Target>
-			<Target title="Release-Modules">
-				<Option output="EJV" prefix_auto="1" extension_auto="1" />
-				<Option type="0" />
+			<Target title="Release-StandardBlocks">
+				<Option output="bin/StandardBlocks" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-pedantic-errors" />
-					<Add option="-pedantic" />
-					<Add option="-std=c++11" />
+					<Add option="-fPIC" />
 					<Add directory="modules/Commons/include" />
 					<Add directory="modules" />
 				</Compiler>
 			</Target>
+			<Target title="Release-Main">
+				<Option output="bin/EJV" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Linker>
+					<Add library="bin/libEJV.so" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O3" />
+			<Add option="-pedantic-errors" />
+			<Add option="-pedantic" />
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
@@ -74,37 +82,40 @@
 			<Option target="Release-Core" />
 		</Unit>
 		<Unit filename="modules/Generators/Flatland/Flatland.cpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Generators/Perlingen/Perlingen.cpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Loaders/Anvil/AnvilLoader.cpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardBlocks/StandardBlocks.cpp">
-			<Option target="Release-Modules" />
+			<Option target="Release-StandardBlocks" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardBlocks/StandardBlocks.hpp">
-			<Option target="Release-Modules" />
+			<Option target="Release-StandardBlocks" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardEntities/StandardEntities.cpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardEntities/StandardEntities.hpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardItems/StandardItems.cpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="modules/Rules/StandardItems/StandardItems.hpp">
-			<Option target="Release-Modules" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/GlobalState.cpp">
 			<Option target="Release-Core" />
 		</Unit>
 		<Unit filename="src/Module.cpp">
 			<Option target="Release-Core" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option target="Release-Main" />
 		</Unit>
 		<Extensions>
 			<code_completion />
