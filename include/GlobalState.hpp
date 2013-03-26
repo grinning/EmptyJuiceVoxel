@@ -10,6 +10,8 @@
 #include "Chunk.hpp"
 #include "Action.hpp"
 
+#include "Metadata.hpp"
+
 #include "Module.hpp"
 
 // STL
@@ -45,7 +47,7 @@ namespace EJV
         }
     };
 
-    struct Entity
+    struct Entity : public Metadata
     {
         unsigned short type;
 
@@ -54,7 +56,7 @@ namespace EJV
         double posX, posY, posZ;
     };
 
-	struct World
+	struct World : public Metadata
 	{
 	    // Name
 
@@ -115,6 +117,13 @@ namespace EJV
 
         /** Updates a block */
         void updateBlock(Chunk* chunk, const Point3D& point);
+	};
+
+	struct Location
+	{
+	    World* world;
+
+	    int x, y, z;
 	};
 
 	/** Stores information about a block */

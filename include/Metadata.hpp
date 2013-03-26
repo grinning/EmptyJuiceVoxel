@@ -7,6 +7,9 @@
 #ifndef METADATA_INCLUDED
 #define METADATA_INCLUDED
 
+#include <stdexcept>
+#include <map>
+
 /**
  * @file Interface for metadata
  *
@@ -19,11 +22,30 @@ namespace EJV
 	 * about blocks, chunks, or worlds.
 	 * Hold a basic void* pointer and a size.
 	 */
-	struct Metadata
+	/*struct Metadata
 	{
 		int size;
 
 		void *data;
+	};*/
+
+	// My proposal -Andrew
+	struct Metadata
+	{
+	    typedef std::map<const std::string, void*> MetadataMap;
+
+	    MetadataMap data;
+
+	    template <typename T>
+	    inline T& getMetadata(const std::string& name)
+	    {
+	        T* ptr = (T*) data[name];
+
+	        // Temporary
+	        if (!ptr) throw std::runtime_error("Invalid metadata");
+
+	        return *ptr;
+	    }
 	};
 }
 

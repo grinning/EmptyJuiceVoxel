@@ -99,7 +99,7 @@ namespace EJV
         if (!chunk) return;
 
         // Fetch block information
-        BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z]);
+        BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z].ID);
 
         // Update block
         if (info.updateFunc)
