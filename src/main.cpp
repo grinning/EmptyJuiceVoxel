@@ -15,7 +15,7 @@ int main()
     GeneratorModule* flatland = new GeneratorModule;
     UIModule* gfx = new UIModule;
 
-    if (!standardBlocks->load("/home/andrew/Git/EmptyJuiceVoxel/bin/libStandardBlocks.so"))
+    if (!standardBlocks->load("bin/libStandardBlocks.so"))
     {
         std::cout << "Unable to load module libStandardBlocks.so" << std::endl;
         std::cout << "Error: " << dlerror() << std::endl;

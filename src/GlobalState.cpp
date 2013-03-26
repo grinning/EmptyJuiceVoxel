@@ -4,7 +4,6 @@
 #include "Loader.hpp"
 #include "Generator.hpp"
 #include "Rules.hpp"
-
 namespace EJV
 {
     State *State::_singleton = 0;
