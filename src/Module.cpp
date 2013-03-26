@@ -6,7 +6,7 @@ namespace EJV
 {
     bool SharedLibrary::load(const std::string& path)
     {
-        _handle = dlopen(path.c_str(), RTLD_LAZY);
+        _handle = dlopen(path.c_str(), RTLD_LAZY | RTLD_LOCAL);
 
         return _handle;
     }
