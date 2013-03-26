@@ -29,22 +29,22 @@ namespace EJV
 		void *data;
 	};*/
 
-	// My proposal -Andrew
+	// My proposal -Andrew + Invalid
 	struct Metadata
 	{
-	    typedef std::map<const std::string, void*> MetadataMap;
+	    typedef std::map<const unsigned int, void*> MetadataMap;
 
 	    MetadataMap data;
 
 	    template <typename T>
-	    inline T& getMetadata(const std::string& name)
+	    inline T& getMetadata(unsigned int id)
 	    {
-	        T* ptr = (T*) data[name];
+            MetadataMap::iterator it = data.find(id);
 
-	        // Temporary
-	        if (!ptr) throw std::runtime_error("Invalid metadata");
+            // Lol out of range
+            if(it == data.end()) throw std::runtime_error("Invalid metadata ID");
 
-	        return *ptr;
+            return *((T*)it->second);
 	    }
 	};
 }
