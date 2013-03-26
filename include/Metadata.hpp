@@ -8,7 +8,7 @@
 #define METADATA_INCLUDED
 
 #include <stdexcept>
-#include <map>
+#include <vector>
 
 /**
  * @file Interface for metadata
@@ -32,20 +32,34 @@ namespace EJV
 	// My proposal -Andrew + Invalid
 	struct Metadata
 	{
-	    typedef std::map<const unsigned int, void*> MetadataMap;
+	    typedef std::vector<void*> MetadataList;
 
-	    MetadataMap data;
+	    MetadataList data;
 
 	    template <typename T>
 	    inline T& getMetadata(unsigned int id)
 	    {
-            MetadataMap::iterator it = data.find(id);
+            if (id > data.size()) throw std::runtime_error("Out of range");
 
-            // Lol out of range
-            if(it == data.end()) throw std::runtime_error("Invalid metadata ID");
+            T* ptr = (T*) data[id];
 
-            return *((T*)it->second);
+            if (!ptr) throw std::runtime_error("Invalid metadata");
+
+            return *ptr;
 	    }
+
+        unsigned int registerData(void* metadata)
+        {
+            if (!metadata) return 0;
+
+            data.push_back(metadata);
+
+            return data.size() - 1;
+        }
+
+        unsigned int getNumMetadata() const { return data.size(); }
+
+        bool isRegistered(const unsigned int& id) const { return id < data.size(); }
 	};
 }
 

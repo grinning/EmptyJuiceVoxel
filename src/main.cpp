@@ -49,9 +49,10 @@ int main()
     // Reguest chunk
     //mainWorld->loadChunk(Point3D(0, 0, 0));
 
-    std::cout << "Number of registered blocks:   " << CORE.getNumRegisteredBlocks() << std::endl;
+    /*std::cout << "Number of registered blocks:   " << CORE.getNumRegisteredBlocks() << std::endl;
     std::cout << "Number of registered items:    " << CORE.getNumRegisteredItems() << std::endl;
-    std::cout << "Number of registered entities: " << CORE.getNumRegisteredEntities() << std::endl;
+    std::cout << "Number of registered entities: " << CORE.getNumRegisteredEntities() << std::endl;*/
+    std::cout << "Number of registered objects: " << CORE.getNumMetadata() << std::endl;
 
     CORE.run();
 

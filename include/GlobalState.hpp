@@ -171,7 +171,7 @@ namespace EJV
 	    EntityInfo() {}
 	};
 
-	class State
+	class State : public Metadata
 	{
 		private:
             // Singleton
@@ -184,13 +184,13 @@ namespace EJV
             State& operator=(const State& orig) { return *this; }
 
         protected:
-            typedef std::vector<BlockInfo>  BlockList;
+            /*typedef std::vector<BlockInfo>  BlockList;
             typedef std::vector<ItemInfo>   ItemList;
             typedef std::vector<EntityInfo> EntityList;
 
             BlockList  _registeredBlocks;
             ItemList   _registeredItems;
-            EntityList _registeredEntities;
+            EntityList _registeredEntities;*/
 
             typedef std::list<RuleModule*> RuleModuleList;
             typedef std::list<UIModule*>   UIModuleList;
@@ -229,7 +229,7 @@ namespace EJV
             void registerUIModule(UIModule* module);
 
             // INFORMATION
-            BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
+            /*BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
             const BlockInfo& getBlockInfo(const unsigned short index) const { return _registeredBlocks.at(index); }
 
             ItemInfo& getItemInfo(const unsigned short index) { return _registeredItems.at(index); }
@@ -248,7 +248,7 @@ namespace EJV
 
             bool isBlockRegistered(const ID index) const { return index < _registeredBlocks.size(); }
             bool isItemRegistered(const ID index) const { return index < _registeredItems.size(); }
-            bool isEntityRegistered(const ID index) const { return index < _registeredEntities.size(); }
+            bool isEntityRegistered(const ID index) const { return index < _registeredEntities.size(); }*/
 
             // SPEED
             unsigned int getTickDuration() const { return _tickDuration; }

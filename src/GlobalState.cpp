@@ -82,7 +82,8 @@ namespace EJV
         for (EntityList::iterator it = entities.begin(); it != entities.end(); ++it)
         {
             // Fetch entity information
-            EntityInfo& info = State::GET().getEntityInfo((*it)->type);
+            //EntityInfo& info = State::GET().getEntityInfo((*it)->type);
+            EntityInfo& info = State::GET().getMetadata<EntityInfo>((*it)->type);
 
             // Update entity
             if (info.updateFunc)
@@ -98,7 +99,8 @@ namespace EJV
         if (!chunk) return;
 
         // Fetch block information
-        BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z].ID);
+        //BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z].ID);
+        BlockInfo& info = State::GET().getMetadata<BlockInfo>(chunk->blocks[point.x][point.y][point.z].ID);
 
         // Update block
         if (info.updateFunc)
@@ -166,7 +168,7 @@ namespace EJV
         _uis.push_back(module);
     }
 
-    State::ID State::registerBlock(const BlockInfo& info)
+    /*State::ID State::registerBlock(const BlockInfo& info)
     {
         _registeredBlocks.push_back(info);
 
@@ -185,5 +187,5 @@ namespace EJV
         _registeredEntities.push_back(info);
 
         return _registeredEntities.size() - 1;
-    }
+    }*/
 }
