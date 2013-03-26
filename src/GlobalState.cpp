@@ -15,6 +15,9 @@ namespace EJV
 
     void World::initProviders()
     {
+        generator->init();
+        loader->init();
+
         generator->setWorldName(worldName);
         loader->setWorldName(worldName);
     }
@@ -82,7 +85,6 @@ namespace EJV
         for (EntityList::iterator it = entities.begin(); it != entities.end(); ++it)
         {
             // Fetch entity information
-            //EntityInfo& info = State::GET().getEntityInfo((*it)->type);
             EntityInfo& info = State::GET().getMetadata<EntityInfo>((*it)->type);
 
             // Update entity
@@ -99,7 +101,6 @@ namespace EJV
         if (!chunk) return;
 
         // Fetch block information
-        //BlockInfo& info = State::GET().getBlockInfo(chunk->blocks[point.x][point.y][point.z].ID);
         BlockInfo& info = State::GET().getMetadata<BlockInfo>(chunk->blocks[point.x][point.y][point.z].ID);
 
         // Update block
@@ -112,11 +113,11 @@ namespace EJV
     bool State::gameTick()
     {
         // Update worlds
-        for (WorldMap::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
+        for (WorldList::iterator it = loadedWorlds.begin(); it != loadedWorlds.end(); ++it)
         {
-            ++it->second->ticks;
+            ++(*it)->ticks;
 
-            it->second->update();
+           (*it)->update();
         }
 
         // Pass control to modules
@@ -167,25 +168,4 @@ namespace EJV
 
         _uis.push_back(module);
     }
-
-    /*State::ID State::registerBlock(const BlockInfo& info)
-    {
-        _registeredBlocks.push_back(info);
-
-        return _registeredBlocks.size() - 1;
-    }
-
-    State::ID State::registerItem(const ItemInfo& info)
-    {
-        _registeredItems.push_back(info);
-
-        return _registeredItems.size() - 1;
-    }
-
-    State::ID State::registerEntity(const EntityInfo& info)
-    {
-        _registeredEntities.push_back(info);
-
-        return _registeredEntities.size() - 1;
-    }*/
 }

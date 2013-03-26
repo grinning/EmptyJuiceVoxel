@@ -91,7 +91,7 @@ namespace EJV
 		// Functions
 
 		/** Sets the world's name. */
-		World(const std::string& name): worldName(name) {}
+		World(const std::string& name) : worldName(name) {}
 
 		/** Initializes the loader/generator.*/
         void initProviders();
@@ -184,14 +184,6 @@ namespace EJV
             State& operator=(const State& orig) { return *this; }
 
         protected:
-            /*typedef std::vector<BlockInfo>  BlockList;
-            typedef std::vector<ItemInfo>   ItemList;
-            typedef std::vector<EntityInfo> EntityList;
-
-            BlockList  _registeredBlocks;
-            ItemList   _registeredItems;
-            EntityList _registeredEntities;*/
-
             typedef std::list<RuleModule*> RuleModuleList;
             typedef std::list<UIModule*>   UIModuleList;
 
@@ -211,12 +203,12 @@ namespace EJV
             bool gameTick();
 
 		public:
-            typedef std::map<const std::string, World*> WorldMap;
+            typedef std::vector<World*> WorldList;
             typedef std::list<Action::Base*> ActionList;
 
             typedef unsigned short ID;
 
-            WorldMap loadedWorlds;
+            WorldList loadedWorlds;
             ActionList actions;
 
             // MUST NOT BE INLINED
@@ -228,29 +220,7 @@ namespace EJV
             void registerRuleModule(RuleModule* module);
             void registerUIModule(UIModule* module);
 
-            // INFORMATION
-            /*BlockInfo& getBlockInfo(const unsigned short index) { return _registeredBlocks.at(index); }
-            const BlockInfo& getBlockInfo(const unsigned short index) const { return _registeredBlocks.at(index); }
-
-            ItemInfo& getItemInfo(const unsigned short index) { return _registeredItems.at(index); }
-            const ItemInfo& getItemInfo(const unsigned short index) const { return _registeredItems.at(index); }
-
-            EntityInfo& getEntityInfo(const unsigned short index) { return _registeredEntities.at(index); }
-            const EntityInfo& getEntityInfo(const unsigned short index) const { return _registeredEntities.at(index); }
-
-            ID registerBlock(const BlockInfo& info);
-            ID registerItem(const ItemInfo& info);
-            ID registerEntity(const EntityInfo& info);
-
-            unsigned short getNumRegisteredBlocks() const { return _registeredBlocks.size(); }
-            unsigned short getNumRegisteredItems() const { return _registeredItems.size(); }
-            unsigned short getNumRegisteredEntities() const { return _registeredEntities.size(); }
-
-            bool isBlockRegistered(const ID index) const { return index < _registeredBlocks.size(); }
-            bool isItemRegistered(const ID index) const { return index < _registeredItems.size(); }
-            bool isEntityRegistered(const ID index) const { return index < _registeredEntities.size(); }*/
-
-            // SPEED
+            // SIMULATION SPEED
             unsigned int getTickDuration() const { return _tickDuration; }
             double       getTickDurationSeconds() const { return _tickDuration / 1000.0; }
 

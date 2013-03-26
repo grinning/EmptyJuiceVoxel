@@ -17,19 +17,7 @@
 
 namespace EJV
 {
-	/**
-	 * Structure for module specific metadata
-	 * about blocks, chunks, or worlds.
-	 * Hold a basic void* pointer and a size.
-	 */
-	/*struct Metadata
-	{
-		int size;
-
-		void *data;
-	};*/
-
-	// My proposal -Andrew + Invalid
+    /** Abstract container of data. Provides a dynamic registration system */
 	struct Metadata
 	{
 	    typedef std::vector<void*> MetadataList;
@@ -50,8 +38,6 @@ namespace EJV
 
         unsigned int registerData(void* metadata)
         {
-            if (!metadata) return 0;
-
             data.push_back(metadata);
 
             return data.size() - 1;
